@@ -1,4 +1,4 @@
-const socket = io("https://your-vercel-deploy.vercel.app");
+const socket = io("https://cozyvid.vercel.app");
 const local = document.getElementById("local");
 const remote = document.getElementById("remote");
 
