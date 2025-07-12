@@ -1,14 +1,15 @@
-const socket = io("https://cozyvid.vercel.app");
-const local = document.getElementById("local");
-const remote = document.getElementById("remote");
+const socket = io();
+const local = document.getElementById('local');
+const remote = document.getElementById('remote');
 
 let pc = new RTCPeerConnection();
+
 navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
   local.srcObject = stream;
   stream.getTracks().forEach(track => pc.addTrack(track, stream));
 });
 
-pc.ontrack = e => remote.srcObject = e.streams[0];
+pc.ontrack = (e) => remote.srcObject = e.streams[0];
 
 pc.onicecandidate = e => {
   if (e.candidate) socket.emit('ice', e.candidate);

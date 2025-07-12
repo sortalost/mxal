@@ -1,3 +1,5 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/api/video.py" }]
+  "rewrites": [
+    { "source": "/socket.io/:match*", "destination": "/api/socket.js" }
+  ]
 }
