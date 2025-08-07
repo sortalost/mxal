@@ -27,12 +27,12 @@ def smtp_connect():
     return server
 
 # Routes
-@app.route("/")
+@app.route("/",methods=["GET","POST"])
 def index():
     return render_template("index.html", logged_in=('email' in session))
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/login',methods=["GET","POST"])
 def login():
     data = request.get_json(force=True)
     session['email'] = data['email']
@@ -44,12 +44,12 @@ def login():
     except:
         return jsonify({'status': 'fail'}), 401
 
-@app.route('/logout')
+@app.route('/logout',methods=["GET","POST"])
 def logout():
     session.clear()
     return jsonify({'status': 'logged out'})
 
-@app.route('/inbox')
+@app.route('/inbox',methods=["GET","POST"])
 def inbox():
     if 'email' not in session:
         return jsonify({'error': 'unauthorized'}), 401
@@ -70,7 +70,7 @@ def inbox():
     mail.logout()
     return jsonify(mails)
 
-@app.route('/read')
+@app.route('/read',methods=["GET","POST"])
 def read():
     mail_id = request.args.get('id')
     if 'email' not in session:
@@ -95,7 +95,7 @@ def read():
         'body': body
     })
 
-@app.route('/send', methods=['POST'])
+@app.route('/send',methods=["GET","POST"])
 def send():
     data = request.json
     msg = MIMEMultipart()
