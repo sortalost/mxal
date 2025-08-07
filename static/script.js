@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
   loginForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(loginForm));
+    console.log(data)
+    console.log(JSON.stringify(data))
     const res = await fetch("/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

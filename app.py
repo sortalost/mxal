@@ -35,7 +35,8 @@ def index():
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json(force=True)
-    session['email'] = data['email']
+    print(data)
+    session['email'] = data.get('email')
     session['password'] = data['password']
     try:
         imap = imap_connect()
