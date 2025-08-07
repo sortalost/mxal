@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mail Client</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div id="login-box">
+    <h2>Login</h2>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+  </div>
+
+  <div id="mailbox" style="display:none;">
+    <div id="top-bar">
+      <span id="user-email"></span>
+      <button onclick="logout()">Logout</button>
+      <button onclick="showCompose()">Compose</button>
+    </div>
+
+    <div id="inbox"></div>
+
+    <div id="read-view" style="display:none;">
+      <h3 id="read-subject"></h3>
+      <p id="read-from"></p>
+      <pre id="read-body"></pre>
+      <button onclick="hideRead()">Back</button>
+    </div>
+
+    <div id="compose-box" style="display:none;">
+      <h2>Compose</h2>
+      <input id="to" placeholder="To">
+      <input id="subject" placeholder="Subject">
+      <textarea id="body" placeholder="Message"></textarea>
+      <button onclick="send()">Send</button>
+      <button onclick="hideCompose()">Cancel</button>
+    </div>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f2f2f2;
+}
+
+input, textarea, button {
+  display: block;
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px;
+  font-size: 1em;
+}
+
+#login-box, #compose-box, #read-view {
+  background: white;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+#inbox {
+  padding: 10px;
+}
+
+.mail-item {
+  background: #fff;
+  margin: 5px 10px;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#top-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
