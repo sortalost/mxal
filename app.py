@@ -32,7 +32,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/api/login', methods=['POST'])
+@app.route('/login', methods=['POST'])
 def login():
     data = request.json
     session['email'] = data['email']
@@ -44,12 +44,12 @@ def login():
     except:
         return jsonify({'status': 'fail'}), 401
 
-@app.route('/api/logout')
+@app.route('/logout')
 def logout():
     session.clear()
     return jsonify({'status': 'logged out'})
 
-@app.route('/api/inbox')
+@app.route('/inbox')
 def inbox():
     if 'email' not in session:
         return jsonify({'error': 'unauthorized'}), 401
@@ -70,7 +70,7 @@ def inbox():
     mail.logout()
     return jsonify(mails)
 
-@app.route('/api/read')
+@app.route('/read')
 def read():
     mail_id = request.args.get('id')
     if 'email' not in session:
@@ -95,7 +95,7 @@ def read():
         'body': body
     })
 
-@app.route('/api/send', methods=['POST'])
+@app.route('/send', methods=['POST'])
 def send():
     data = request.json
     msg = MIMEMultipart()
