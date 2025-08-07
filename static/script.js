@@ -4,6 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const sentBtn = document.getElementById("sent-btn");
   const composeBtn = document.getElementById("compose-btn");
   const logoutBtn = document.getElementById("logout-btn");
+  const isLoggedIn = document.body.dataset.loggedIn === "true";
+
+  if (isLoggedIn) {
+    document.getElementById("login-page").classList.add("hidden");
+    document.getElementById("inbox-page").classList.remove("hidden");
+    document.getElementById("user-info").textContent = sessionStorage.getItem("email") || "";
+  }
 
   loginForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -16,7 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("sent login")
     const out = await res.json();
     console.log(out)
-    if (out.success) location.reload();
+    if (out.success) {
+      sessionStorage.setItem("email", data.email);
+      document.getElementById("login-page").classList.add("hidden");
+      document.getElementById("inbox-page").classList.remove("hidden");
+      document.getElementById("user-info").textContent = data.email;
+    }
     else document.getElementById("login-error").textContent = out.message;
   });
 
@@ -31,8 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   logoutBtn?.addEventListener("click", async () => {
     await fetch("/logout", { method: "POST" });
+    sessionStorage.clear();
     location.reload();
   });
+
 
   document.getElementById("send-form")?.addEventListener("submit", async (e) => {
     e.preventDefault();

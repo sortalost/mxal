@@ -29,7 +29,7 @@ def smtp_connect():
 # Routes
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", logged_in=('email' in session))
 
 
 @app.route('/login', methods=['POST'])

@@ -6,7 +6,7 @@
   <title>Mail Client</title>
   <link rel="stylesheet" href="/static/style.css">
 </head>
-<body>
+<body data-logged-in="{{ 'true' if logged_in else 'false' }}">
   <div id="app">
     <!-- Login Page -->
     <section id="login-page">
