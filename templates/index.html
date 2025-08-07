@@ -23,13 +23,13 @@
     <section id="inbox-page" class="hidden">
       <header>
         <div id="user-info"></div>
-        <button onclick="logout()">Logout</button>
+        <button id="logout-btn">Logout</button>
       </header>
 
       <nav>
-        <button onclick="loadInbox()">Inbox</button>
-        <button onclick="loadSent()">Sent</button>
-        <button onclick="showCompose()">Compose</button>
+        <button id="inbox-btn">Inbox</button>
+        <button id="sent-btn">Sent</button>
+        <button id="compose-btn">Compose</button>
       </nav>
 
       <div id="email-list"></div>
@@ -37,7 +37,7 @@
 
     <!-- Read Page -->
     <section id="read-page" class="hidden">
-      <button onclick="backToInbox()">Back</button>
+      <button id="inbox-btn">Back</button>
       <div id="read-subject"></div>
       <div id="read-meta"></div>
       <iframe id="read-body"></iframe>
@@ -45,7 +45,7 @@
 
     <!-- Compose Page -->
     <section id="compose-page" class="hidden">
-      <button onclick="backToInbox()">Cancel</button>
+      <button id="inbox-btn">Cancel</button>
       <form id="compose-form">
         <input name="to" type="email" id="compose-to" placeholder="To" required>
         <input name="subject" type="text" id="compose-subject" placeholder="Subject" required>
