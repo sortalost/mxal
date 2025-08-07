@@ -1,4 +1,4 @@
-from flask import Flask, request, session, jsonify
+from flask import Flask, request, session, jsonify, render_template
 from flask_cors import CORS
 import imaplib, smtplib, email
 from email.mime.text import MIMEText
@@ -27,6 +27,11 @@ def smtp_connect():
     return server
 
 # Routes
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+
 @app.route('/api/login', methods=['POST'])
 def login():
     data = request.json
