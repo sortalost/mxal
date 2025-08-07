@@ -34,7 +34,7 @@ def index():
 
 @app.route('/login', methods=['POST'])
 def login():
-    data = request.json
+    data = request.get_json(force=True)
     session['email'] = data['email']
     session['password'] = data['password']
     try:
