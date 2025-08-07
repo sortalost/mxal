@@ -13,7 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
+    console.log("sent login")
     const out = await res.json();
+    console.log(out)
     if (out.success) location.reload();
     else document.getElementById("login-error").textContent = out.message;
   });

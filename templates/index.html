@@ -47,9 +47,9 @@
     <section id="compose-page" class="hidden">
       <button onclick="backToInbox()">Cancel</button>
       <form id="compose-form">
-        <input type="email" id="compose-to" placeholder="To" required>
-        <input type="text" id="compose-subject" placeholder="Subject" required>
-        <textarea id="compose-body" placeholder="Body (HTML allowed)" required></textarea>
+        <input name="to" type="email" id="compose-to" placeholder="To" required>
+        <input name="subject" type="text" id="compose-subject" placeholder="Subject" required>
+        <textarea name="body" id="compose-body" placeholder="Body (HTML allowed)" required></textarea>
         <button type="submit">Send</button>
       </form>
       <div id="send-status"></div>
