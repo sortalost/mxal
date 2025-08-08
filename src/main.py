@@ -5,7 +5,7 @@ from .modules.smtp_client import send_email
 from .modules.utils import login_required
 
 app = Flask(__name__)
-app.secret_key = os.urandom(8)
+app.secret_key = "secretkeylol"
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -83,4 +83,4 @@ def logout():
     return redirect(url_for("login"))
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=False)
