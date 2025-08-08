@@ -42,4 +42,11 @@
 <div class="text-center mt-3">
     <button id="load-more" class="btn btn-primary">load more</button>
 </div>
+
+<script>
+window.INBOX_DATA = {
+    loadedCount: {{ messages|length }},
+    limit: 15
+};
+</script>
 {% endblock %}

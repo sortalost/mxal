@@ -1,5 +1,5 @@
-let loadedCount = {{ messages|length }};
-const limit = 10;
+let loadedCount = window.INBOX_DATA.loadedCount;
+const limit = window.INBOX_DATA.limit;
 
 // Load More handler
 document.getElementById("load-more").addEventListener("click", () => {
