@@ -1,102 +1,36 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const loginForm = document.getElementById("login-form");
-  const inboxBtn = document.getElementById("inbox-btn");
-  const sentBtn = document.getElementById("sent-btn");
-  const composeBtn = document.getElementById("compose-btn");
-  const logoutBtn = document.getElementById("logout-btn");
-  const isLoggedIn = document.body.dataset.loggedIn === "true";
+function refreshInbox() {
+    fetch("{{ url_for('api_inbox') }}")
+      .then(res => res.json())
+      .then(data => {
+          let desktopBody = document.querySelector("#inbox-table-body");
+          let mobileList = document.querySelector("#inbox-mobile-list");
 
-  if (isLoggedIn) {
-    document.getElementById("login-page").classList.add("hidden");
-    document.getElementById("inbox-page").classList.remove("hidden");
-    document.getElementById("user-info").textContent = sessionStorage.getItem("email") || "";
-  }
+          if (desktopBody) desktopBody.innerHTML = "";
+          if (mobileList) mobileList.innerHTML = "";
 
-  loginForm?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(loginForm));
-    const res = await fetch("/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    console.log("sent login")
-    const out = await res.json();
-    console.log(out)
-    if (out.success) {
-      sessionStorage.setItem("email", data.email);
-      document.getElementById("login-page").classList.add("hidden");
-      document.getElementById("inbox-page").classList.remove("hidden");
-      document.getElementById("user-info").textContent = data.email;
-    }
-    else document.getElementById("login-error").textContent = out.message;
-  });
+          data.forEach(msg => {
+              if (desktopBody) {
+                  desktopBody.innerHTML += `
+                    <tr>
+                        <td class="text-truncate" style="max-width: 150px;">${msg.from}</td>
+                        <td><a href="/view/${msg.id}" class="text-decoration-none">${msg.subject}</a></td>
+                        <td>${msg.date}</td>
+                    </tr>`;
+              }
+              if (mobileList) {
+                  mobileList.innerHTML += `
+                    <a href="/view/${msg.id}" class="text-decoration-none text-dark">
+                      <div class="card mb-2 shadow-sm">
+                        <div class="card-body">
+                          <div class="fw-bold text-truncate">${msg.subject}</div>
+                          <div class="small text-muted">${msg.from}</div>
+                          <div class="small">${msg.date}</div>
+                        </div>
+                      </div>
+                    </a>`;
+              }
+          });
+      });
+}
 
-  inboxBtn?.addEventListener("click", () => loadMails("inbox"));
-  sentBtn?.addEventListener("click", () => loadMails("sent"));
-
-  composeBtn?.addEventListener("click", () => {
-    document.getElementById("compose-form").classList.remove("hidden");
-    document.getElementById("email-view").classList.add("hidden");
-    document.getElementById("email-list").innerHTML = "";
-  });
-
-  logoutBtn?.addEventListener("click", async () => {
-    await fetch("/logout", { method: "POST" });
-    sessionStorage.clear();
-    location.reload();
-  });
-
-
-  document.getElementById("send-form")?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.target));
-    const res = await fetch("/send", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    const out = await res.json();
-    const status = document.getElementById("send-status");
-    status.textContent = out.message;
-    if (out.success) e.target.reset();
-  });
-
-  async function loadMails(folder) {
-    const res = await fetch(`/${folder}`);
-    const out = await res.json();
-    const list = document.getElementById("email-list");
-    const view = document.getElementById("email-view");
-    const compose = document.getElementById("compose-form");
-
-    list.innerHTML = "";
-    view.classList.add("hidden");
-    compose.classList.add("hidden");
-
-    out.forEach((msg, i) => {
-      const card = document.createElement("div");
-      card.innerHTML = `
-        <strong>${msg.subject || "(No subject)"}</strong><br>
-        From: ${msg.from}<br>
-        <small>${msg.date}</small>
-      `;
-      card.onclick = () => readMail(i, folder);
-      list.appendChild(card);
-    });
-  }
-
-  async function readMail(index, folder) {
-    const res = await fetch(`/read/${folder}/${index}`);
-    const out = await res.json();
-    const view = document.getElementById("email-view");
-
-    document.getElementById("read-subject").textContent = out.subject;
-    document.getElementById("read-from").textContent = out.from;
-    document.getElementById("read-date").textContent = out.date;
-
-    const iframe = document.getElementById("read-body");
-    iframe.srcdoc = out.body;
-
-    view.classList.remove("hidden");
-  }
-});
+setInterval(refreshInbox, 30000);

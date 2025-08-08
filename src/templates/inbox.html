@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 <h2 class="mb-3">Inbox</h2>
+
+<!-- Desktop view -->
 <div class="table-responsive d-none d-md-block">
   <table class="table table-hover align-middle">
       <thead class="table-dark">
@@ -10,22 +12,20 @@
               <th>Date</th>
           </tr>
       </thead>
-      <tbody>
-          {% for msg in messages %}
-          <tr>
-              <td class="text-truncate" style="max-width: 150px;">{{ msg.from }}</td>
-              <td>
-                  <a href="{{ url_for('view_email', email_id=msg.id) }}" class="text-decoration-none">
-                      {{ msg.subject }}
-                  </a>
-              </td>
-              <td>{{ msg.date }}</td>
-          </tr>
-          {% endfor %}
-      </tbody>
+        <tbody id="inbox-table-body">
+        {% for msg in messages %}
+            <tr>
+                <td class="text-truncate" style="max-width: 150px;">{{ msg.from }}</td>
+                <td><a href="{{ url_for('view_email', email_id=msg.id) }}" class="text-decoration-none">{{ msg.subject }}</a></td>
+                <td>{{ msg.date }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
   </table>
 </div>
-<div class="d-block d-md-none">
+
+<!-- Mobile view -->
+<div id="inbox-mobile-list" class="d-block d-md-none">
     {% for msg in messages %}
     <a href="{{ url_for('view_email', email_id=msg.id) }}" class="text-decoration-none text-dark">
       <div class="card mb-2 shadow-sm">
@@ -38,12 +38,15 @@
     </a>
     {% endfor %}
 </div>
+
+<!-- Pagination -->
 <div class="d-flex justify-content-between mt-3">
     {% if prev_start is not none %}
     <a href="{{ url_for('inbox', start=prev_start) }}" class="btn btn-secondary">Previous</a>
     {% else %}
     <span></span>
     {% endif %}
+
     {% if next_start is not none %}
     <a href="{{ url_for('inbox', start=next_start) }}" class="btn btn-primary">Load More</a>
     {% endif %}
