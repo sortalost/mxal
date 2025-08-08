@@ -10,15 +10,19 @@
               <th>Date</th>
           </tr>
       </thead>
-      <tbody>
-          {% for msg in messages %}
-          <tr>
-              <td class="text-truncate" style="max-width: 150px;">{{ msg.from }}</td>
-              <td class="text-truncate" style="max-width: 250px;">{{ msg.subject }}</td>
-              <td>{{ msg.date }}</td>
-          </tr>
-          {% endfor %}
-      </tbody>
+        <tbody>
+            {% for msg in messages %}
+            <tr>
+                <td class="text-truncate" style="max-width: 150px;">{{ msg.from }}</td>
+                <td>
+                    <a href="{{ url_for('view_email', email_id=msg.id) }}" class="text-decoration-none">
+                        {{ msg.subject }}
+                    </a>
+                </td>
+                <td>{{ msg.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
   </table>
 </div>
 

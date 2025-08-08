@@ -27,6 +27,7 @@ def fetch_inbox(user, password, start=0, limit=10):
         raw_email = msg_data[0][1]
         msg = email.message_from_bytes(raw_email)
         messages.append({
+            "id": eid.decode(),
             "from": msg["From"],
             "subject": msg["Subject"],
             "date": msg["Date"]
@@ -34,3 +35,26 @@ def fetch_inbox(user, password, start=0, limit=10):
     mail.close()
     mail.logout()
     return messages, len(email_ids)
+
+def fetch_email(user, password, email_id):
+    mail = imaplib.IMAP4_SSL(IMAP_SERVER, IMAP_PORT)
+    mail.login(user, password)
+    mail.select("inbox")
+    result, msg_data = mail.fetch(email_id, "(RFC822)")
+    raw_email = msg_data[0][1]
+    msg = email.message_from_bytes(raw_email)
+    body = ""
+    if msg.is_multipart():
+        for part in msg.walk():
+            if part.get_content_type() == "text/plain":
+                body += part.get_payload(decode=True).decode(errors="ignore")
+    else:
+        body = msg.get_payload(decode=True).decode(errors="ignore")
+    mail.close()
+    mail.logout()
+    return {
+        "from": msg["From"],
+        "subject": msg["Subject"],
+        "date": msg["Date"],
+        "body": body
+    }

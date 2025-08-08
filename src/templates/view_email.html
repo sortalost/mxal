@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <strong>{{ email.subject }}</strong>
+    <div class="text-muted small">From: {{ email.from }} | {{ email.date }}</div>
+  </div>
+  <div class="card-body">
+    <pre style="white-space: pre-wrap;">{{ email.body }}</pre>
+  </div>
+</div>
+<a href="{{ url_for('inbox') }}" class="btn btn-secondary mt-3">Back to Inbox</a>
+{% endblock %}

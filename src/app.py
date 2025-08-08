@@ -1,9 +1,8 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-from .modules.imap_client import fetch_inbox, test_login
+from .modules.imap_client import fetch_inbox, test_login, fetch_email
 from .modules.smtp_client import send_email
 from .modules.utils import login_required
-
 
 app = Flask(__name__)
 app.secret_key = os.urandom(8)
@@ -51,6 +50,15 @@ def compose():
         flash("Email sent!", "success")
         return redirect(url_for("inbox"))
     return render_template("compose.html")
+
+@app.route("/view/<email_id>")
+@login_required
+def view_email(email_id):
+    if "email_user" not in session:
+        return redirect(url_for("login"))    
+    email_data = fetch_email(session["email_user"], session["email_pass"], email_id)
+    return render_template("view_email.html", email=email_data)
+
 
 @app.route("/logout")
 @login_required
