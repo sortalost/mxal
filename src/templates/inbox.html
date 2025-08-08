@@ -1,22 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Inbox</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>From</th>
-            <th>Subject</th>
-            <th>Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for msg in messages %}
-        <tr>
-            <td>{{ msg.from }}</td>
-            <td>{{ msg.subject }}</td>
-            <td>{{ msg.date }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<h2 class="mb-3">Inbox</h2>
+<div class="table-responsive">
+  <table class="table table-hover align-middle">
+      <thead class="table-dark">
+          <tr>
+              <th>From</th>
+              <th>Subject</th>
+              <th>Date</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for msg in messages %}
+          <tr>
+              <td class="text-truncate" style="max-width: 150px;">{{ msg.from }}</td>
+              <td class="text-truncate" style="max-width: 250px;">{{ msg.subject }}</td>
+              <td>{{ msg.date }}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
 {% endblock %}

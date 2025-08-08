@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Compose Email</h2>
-<form method="POST">
+<h2 class="mb-3">Compose</h2>
+<form method="POST" class="needs-validation" novalidate>
     <div class="mb-3">
-        <label>To</label>
+        <label class="form-label">To</label>
         <input type="email" name="to" class="form-control" required>
     </div>
     <div class="mb-3">
-        <label>Subject</label>
+        <label class="form-label">Subject</label>
         <input type="text" name="subject" class="form-control" required>
     </div>
     <div class="mb-3">
-        <label>Body</label>
-        <textarea name="body" class="form-control" rows="5" required></textarea>
+        <label class="form-label">Body</label>
+        <textarea name="body" class="form-control" rows="6" required></textarea>
     </div>
-    <button class="btn btn-primary">Send</button>
+    <button class="btn btn-primary btn-lg w-100">Send</button>
 </form>
 {% endblock %}

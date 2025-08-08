@@ -1,3 +1,17 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: system-ui, sans-serif;
+}
+.table td, .table th {
+    vertical-align: middle;
+}
+textarea {
+    resize: vertical;
+}
+@media (max-width: 576px) {
+    h2 {
+        font-size: 1.4rem;
+    }
+    nav .navbar-brand {
+        font-size: 1rem;
+    }
 }
