@@ -25,10 +25,18 @@ def login():
 @app.route("/")
 @login_required
 def inbox():
-    if "email_user" not in session:
-        return redirect(url_for("login"))
-    messages = fetch_inbox(session["email_user"], session["email_pass"])
-    return render_template("inbox.html", messages=messages)
+    # ?start
+    start = int(request.args.get("start", 0))
+    limit = 10
+    messages, total_count = fetch_inbox(session["email_user"], session["email_pass"], start=start, limit=limit)
+    next_start = start + limit if start + limit < total_count else None
+    prev_start = start - limit if start - limit >= 0 else None
+    return render_template(
+        "inbox.html",
+        messages=messages,
+        next_start=next_start,
+        prev_start=prev_start
+    )
 
 @app.route("/compose", methods=["GET", "POST"])
 @login_required

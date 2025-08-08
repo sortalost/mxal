@@ -21,4 +21,16 @@
       </tbody>
   </table>
 </div>
+
+<div class="d-flex justify-content-between">
+    {% if prev_start is not none %}
+    <a href="{{ url_for('inbox', start=prev_start) }}" class="btn btn-secondary">Previous</a>
+    {% else %}
+    <span></span>
+    {% endif %}
+
+    {% if next_start is not none %}
+    <a href="{{ url_for('inbox', start=next_start) }}" class="btn btn-primary">Load More</a>
+    {% endif %}
+</div>
 {% endblock %}
