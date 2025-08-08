@@ -7,8 +7,6 @@ from .modules.utils import login_required
 app = Flask(__name__)
 app.secret_key = os.urandom(8)
 
-from . import api
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -36,8 +34,24 @@ def inbox():
         "inbox.html",
         messages=messages,
         next_start=next_start,
-        prev_start=prev_start
+        prev_start=prev_start,
+        msglength = len(messages)
     )
+
+@app.route("/api/inbox")
+def api_inbox():
+    if not session.get('email_user'):
+        return jsonify({'error':'not logged in'}), 401
+    start = int(request.args.get("start", 0))
+    limit = int(request.args.get("limit", 10))
+    messages, _ = fetch_inbox(
+        session["email_user"],
+        session["email_pass"],
+        start=start,
+        limit=limit
+    )
+    return jsonify(messages)
+
 
 @app.route("/compose", methods=["GET", "POST"])
 @login_required
