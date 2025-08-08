@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
-from .modules.imap_client import fetch_inbox, test_login, fetch_email
+from .modules.imap_client import fetch_folder, test_login, fetch_email
 from .modules.smtp_client import send_email
 from .modules.utils import login_required
 
@@ -27,7 +27,7 @@ def inbox():
     # ?start
     start = int(request.args.get("start", 0))
     limit = 10
-    messages, total_count = fetch_inbox(session["email_user"], session["email_pass"], start=start, limit=limit)
+    messages, total_count = fetch_folder(session["email_user"], session["email_pass"], "inbox", start=start, limit=limit)
     next_start = start + limit if start + limit < total_count else None
     prev_start = start - limit if start - limit >= 0 else None
     return render_template(
@@ -44,13 +44,24 @@ def api_inbox():
         return jsonify({'error':'not logged in'}), 401
     start = int(request.args.get("start", 0))
     limit = int(request.args.get("limit", 10))
-    messages, _ = fetch_inbox(
+    messages, _ = fetch_folder(
         session["email_user"],
         session["email_pass"],
+        "inbox",
         start=start,
         limit=limit
     )
     return jsonify(messages)
+
+
+@app.route("/sent")
+@login_required
+def sent():
+    messages, total_count = fetch_folder(
+        session["email_user"],
+        session["email_pass"],
+        "inbox"
+    return render_template("sent.html", emails=emails)
 
 
 @app.route("/compose", methods=["GET", "POST"])

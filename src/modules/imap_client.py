@@ -13,10 +13,10 @@ def test_login(user, password):
     except:
         return False
 
-def fetch_inbox(user, password, start=0, limit=10):
+def fetch_folder(user, password, folder, start=0, limit=10):
     mail = imaplib.IMAP4_SSL(IMAP_SERVER, IMAP_PORT)
     mail.login(user, password)
-    mail.select("inbox")
+    mail.select(folder)
     result, data = mail.search(None, "ALL")
     email_ids = data[0].split()
     email_ids.reverse()
