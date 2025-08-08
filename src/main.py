@@ -61,6 +61,7 @@ def sent():
         session["email_user"],
         session["email_pass"],
         "inbox"
+    )
     return render_template("sent.html", emails=emails)
 
 
