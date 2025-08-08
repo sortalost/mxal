@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from .modules.imap_client import fetch_inbox, test_login
-from modules.smtp_client import send_email
+from .modules.smtp_client import send_email
 
 
 app = Flask(__name__)
