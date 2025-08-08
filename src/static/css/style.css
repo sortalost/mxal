@@ -15,3 +15,14 @@ textarea {
         font-size: 1rem;
     }
 }
+.card {
+    border-radius: 8px;
+}
+.card-body {
+    padding: 0.75rem 1rem;
+}
+@media (max-width: 576px) {
+    h2 {
+        font-size: 1.2rem;
+    }
+}
