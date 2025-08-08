@@ -60,9 +60,9 @@ def sent():
     messages, total_count = fetch_folder(
         session["email_user"],
         session["email_pass"],
-        "inbox"
+        "sent"
     )
-    return render_template("sent.html", emails=emails)
+    return render_template("sent.html", messages=messages, total_count=total_count)
 
 
 @app.route("/compose", methods=["GET", "POST"])
