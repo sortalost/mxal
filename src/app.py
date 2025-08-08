@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from .modules.imap_client import fetch_inbox, test_login
 from .modules.smtp_client import send_email
+from .modules.utils import login_required
 
 
 app = Flask(__name__)
@@ -15,12 +16,14 @@ def login():
         if test_login(email, password):
             session["email_user"] = email
             session["email_pass"] = password
+            session["logged_in"] = True
             return redirect(url_for("inbox"))
         else:
             flash("Login failed. Check your credentials.", "danger")
     return render_template("login.html")
 
 @app.route("/")
+@login_required
 def inbox():
     if "email_user" not in session:
         return redirect(url_for("login"))
@@ -28,6 +31,7 @@ def inbox():
     return render_template("inbox.html", messages=messages)
 
 @app.route("/compose", methods=["GET", "POST"])
+@login_required
 def compose():
     if "email_user" not in session:
         return redirect(url_for("login"))
@@ -41,6 +45,7 @@ def compose():
     return render_template("compose.html")
 
 @app.route("/logout")
+@login_required
 def logout():
     session.clear()
     return redirect(url_for("login"))
