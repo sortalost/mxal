@@ -43,18 +43,26 @@ def fetch_email(user, password, email_id):
     result, msg_data = mail.fetch(email_id, "(RFC822)")
     raw_email = msg_data[0][1]
     msg = email.message_from_bytes(raw_email)
-    body = ""
+    body_plain = ""
+    body_html = None
     if msg.is_multipart():
         for part in msg.walk():
-            if part.get_content_type() == "text/plain":
-                body += part.get_payload(decode=True).decode(errors="ignore")
+            ctype = part.get_content_type()
+            disp = str(part.get("Content-Disposition"))
+            if ctype == "text/plain" and "attachment" not in disp:
+                body_plain += part.get_payload(decode=True).decode(errors="ignore")
+            elif ctype == "text/html" and "attachment" not in disp:
+                body_html = part.get_payload(decode=True).decode(errors="ignore")
     else:
-        body = msg.get_payload(decode=True).decode(errors="ignore")
+        if msg.get_content_type() == "text/plain":
+            body_plain = msg.get_payload(decode=True).decode(errors="ignore")
+        elif msg.get_content_type() == "text/html":
+            body_html = msg.get_payload(decode=True).decode(errors="ignore")
     mail.close()
     mail.logout()
     return {
         "from": msg["From"],
         "subject": msg["Subject"],
         "date": msg["Date"],
-        "body": body
+        "body": body_html if body_html else f"<pre>{body_plain}</pre>"
     }
