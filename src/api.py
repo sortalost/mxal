@@ -4,8 +4,9 @@ from .modules import imap_client
 from .modules import utils
 
 @app.route("/api/inbox")
-@utils.login_required
 def api_inbox():
+    if not session.get('email_user'):
+        return jsonify({'error':'not logged in'}), 401
     start = int(request.args.get("start", 0))
     limit = int(request.args.get("limit", 10))
     messages, _ = imap_client.fetch_inbox(
