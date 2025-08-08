@@ -4,7 +4,7 @@ from .modules import imap_client
 from .modules import utils
 
 @app.route("/api/inbox")
-@utils.login_Required
+@utils.login_required
 def api_inbox():
     start = int(request.args.get("start", 0))
     limit = int(request.args.get("limit", 10))
