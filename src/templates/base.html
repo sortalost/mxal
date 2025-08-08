@@ -7,7 +7,7 @@
 </head>
 <body class="p-4">
     <nav>
-        {% if session.get("email_user") and session.get("email_pass") %}
+        {% if session.get("logged_in") %}
         <a href="{{ url_for('inbox') }}">Inbox</a> |
         <a href="{{ url_for('compose') }}">Compose</a>
         <a href="{{ url_for('logout') }}">Logout</a>
