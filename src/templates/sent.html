@@ -16,7 +16,7 @@
         {% for msg in messages %}
             <tr>
                 <td class="text-truncate" style="max-width: 150px;">{{ msg.to }}</td>
-                <td><a href="{{ url_for('view_email', email_id=msg.id) }}" class="text-decoration-none">{{ msg.subject }}</a></td>
+                <td><a href="{{ url_for('view_email', folder='Sent', email_id=msg.id) }}" class="text-decoration-none">{{ msg.subject }}</a></td>
                 <td>{{ msg.date }}</td>
             </tr>
         {% endfor %}
@@ -27,7 +27,7 @@
 <!-- Mobile view -->
 <div id="sent-mobile-list" class="d-block d-md-none">
     {% for msg in messages %}
-    <a href="{{ url_for('view_email', email_id=msg.id) }}" class="text-decoration-none text-dark">
+    <a href="{{ url_for('view_email', folder='Sent', email_id=msg.id) }}" class="text-decoration-none text-dark">
       <div class="card mb-2 shadow-sm">
         <div class="card-body">
           <div class="fw-bold text-truncate">{{ msg.subject }}</div>
