@@ -16,7 +16,9 @@ def test_login(user, password):
 def fetch_folder(user, password, folder, start=0, limit=10):
     mail = imaplib.IMAP4_SSL(IMAP_SERVER, IMAP_PORT)
     mail.login(user, password)
-    mail.select(folder)
+    status, _ = mail.select(folder, readonly=True)
+    if status != "OK":
+        raise Exception(f"Could not select folder: {folder}")
     result, data = mail.search(None, "ALL")
     email_ids = data[0].split()
     email_ids.reverse()
