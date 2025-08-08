@@ -22,7 +22,7 @@ def fetch_inbox(user, password):
     email_ids = data[0].split()
     messages = []
 
-    for eid in email_ids[-10:]:
+    for eid in email_ids[-15:]:
         _, msg_data = mail.fetch(eid, "(RFC822)")
         raw_email = msg_data[0][1]
         msg = email.message_from_bytes(raw_email)
@@ -34,4 +34,4 @@ def fetch_inbox(user, password):
 
     mail.close()
     mail.logout()
-    return messages
+    return messages[::-1]
