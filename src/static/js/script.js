@@ -1,5 +1,6 @@
 let loadedCount = window.INBOX_DATA.loadedCount;
 const limit = window.INBOX_DATA.limit;
+const page = window.location.pathname.split('/').filter(Boolean).pop();
 
 // Load More handler
 document.getElementById("load-more").addEventListener("click", () => {
@@ -50,12 +51,12 @@ function appendMessages(messages) {
         desktopBody.innerHTML += `
             <tr data-id="${msg.id}">
                 <td class="text-truncate" style="max-width: 150px;">${msg.from}</td>
-                <td><a href="/view/${msg.id}" class="text-decoration-none">${msg.subject}</a></td>
+                <td><a href="/view/${page}/${msg.id}" class="text-decoration-none">${msg.subject}</a></td>
                 <td>${msg.date}</td>
             </tr>
         `;
         mobileList.innerHTML += `
-            <a href="/view/${msg.id}" class="text-decoration-none text-dark" data-id="${msg.id}">
+            <a href="/view/${page}/${msg.id}" class="text-decoration-none text-dark" data-id="${msg.id}">
                 <div class="card mb-2 shadow-sm">
                     <div class="card-body">
                         <div class="fw-bold text-truncate">${msg.subject}</div>
@@ -76,12 +77,12 @@ function prependMessages(messages) {
         desktopBody.insertAdjacentHTML("afterbegin", `
             <tr data-id="${msg.id}">
                 <td class="text-truncate" style="max-width: 150px;">${msg.from}</td>
-                <td><a href="/view/${msg.id}" class="text-decoration-none">${msg.subject}</a></td>
+                <td><a href="/view/${page}/${msg.id}" class="text-decoration-none">${msg.subject}</a></td>
                 <td>${msg.date}</td>
             </tr>
         `);
         mobileList.insertAdjacentHTML("afterbegin", `
-            <a href="/view/${msg.id}" class="text-decoration-none text-dark" data-id="${msg.id}">
+            <a href="/view/${page}/${msg.id}" class="text-decoration-none text-dark" data-id="${msg.id}">
                 <div class="card mb-2 shadow-sm">
                     <div class="card-body">
                         <div class="fw-bold text-truncate">${msg.subject}</div>

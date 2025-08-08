@@ -38,10 +38,10 @@ def fetch_folder(user, password, folder, start=0, limit=10):
     mail.logout()
     return messages, len(email_ids)
 
-def fetch_email(user, password, email_id):
+def fetch_email(user, password, email_id, folder):
     mail = imaplib.IMAP4_SSL(IMAP_SERVER, IMAP_PORT)
     mail.login(user, password)
-    mail.select("inbox")
+    mail.select(folder)
     result, msg_data = mail.fetch(email_id, "(RFC822)")
     raw_email = msg_data[0][1]
     msg = email.message_from_bytes(raw_email)

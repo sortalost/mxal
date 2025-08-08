@@ -79,12 +79,13 @@ def compose():
         return redirect(url_for("inbox"))
     return render_template("compose.html")
 
-@app.route("/view/<email_id>")
+@app.route("/view/<folder>/<email_id>")
 @login_required
-def view_email(email_id):
+def view_email(folder, email_id):
+    folder=folder.title()
     if "email_user" not in session:
         return redirect(url_for("login"))    
-    email_data = fetch_email(session["email_user"], session["email_pass"], email_id)
+    email_data = fetch_email(session["email_user"], session["email_pass"], email_id, folder)
     return render_template("view_email.html", email=email_data)
 
 
