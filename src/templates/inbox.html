@@ -39,16 +39,7 @@
     {% endfor %}
 </div>
 
-<!-- Pagination -->
-<div class="d-flex justify-content-between mt-3">
-    {% if prev_start is not none %}
-    <a href="{{ url_for('inbox', start=prev_start) }}" class="btn btn-secondary">Previous</a>
-    {% else %}
-    <span></span>
-    {% endif %}
-
-    {% if next_start is not none %}
-    <a href="{{ url_for('inbox', start=next_start) }}" class="btn btn-primary">Load More</a>
-    {% endif %}
+<div class="text-center mt-3">
+    <button id="load-more" class="btn btn-primary">load more</button>
 </div>
 {% endblock %}
