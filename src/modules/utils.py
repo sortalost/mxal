@@ -8,7 +8,7 @@ def login_required(f):
             if request.is_json or request.headers.get("X-Requested-With") == "XMLHttpRequest":
                 return jsonify({"success": False, "message": "Login required"}), 401
             else:
-                flash("Please login to access this page.", "danger")
+                flash(f"Please login to access this page.\n{dict(session)}", "danger")
                 return redirect(url_for("login"))
         return f(*args, **kwargs)
     return decorated_function

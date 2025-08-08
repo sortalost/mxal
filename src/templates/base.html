@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/static/others/manifest.json">
     <title>email client</title>
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/mail_192.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -52,5 +53,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/static/others/sw.js', { scope: '/' })
+    .then(reg => console.log('PWA registered at /'))
+    .catch(err => console.error('PWA NOT', err));
+}
+</script>
 </body>
 </html>
