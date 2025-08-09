@@ -1,57 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="/static/other/manifest.json">
-    <title>email client</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/mail_192.png') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}Mail{% endblock %}</title>
+  <link rel="manifest" href="{{ url_for('static', filename='other/manifest.json') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/mail_192.png') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/desktop.css') }}" media="screen and (min-width:769px)">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}" media="screen and (max-width:768px)">
+
 </head>
 <body>
 
-<!-- navbar -->
-<nav class="navbar">
-  <div class="nav-container">
-    <a class="navbar-brand" href="{{ url_for('inbox') }}">mail</a>
-    <div class="nav-links">
-      {% if session.get("email_user") %}
-        <a href="{{ url_for('inbox') }}">Inbox</a>
-        <a href="{{ url_for('compose') }}">Compose</a>
-        <a href="{{ url_for('sent') }}">Sent</a>
-        <a class="logout" href="{{ url_for('logout') }}">Logout</a>
-      {% else %}
-        <a href="{{ url_for('login') }}">Login</a>
-      {% endif %}
-    </div>
+  <div id="app-root">
+
+    <header class="topbar">
+      <button id="hamburger" class="hamburger" aria-label="menu">☰</button>
+      <div class="topbar-title">{{ session.get('email_user') or 'mail' }}</div>
+      <div class="topbar-actions">
+        <button id="search-toggle" class="icon-btn" aria-label="search">🔍</button>
+        <button id="compose-fab" class="compose-fab" aria-label="compose">✉</button>
+      </div>
+    </header>
+
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-head">
+        <div class="brand">mail</div>
+      </div>
+      <ul class="nav-list">
+        <li><a href="{{ url_for('inbox') }}" class="nav-link">Inbox</a></li>
+        <li><a href="{{ url_for('sent') }}" class="nav-link">Sent</a></li>
+        <li><a href="{{ url_for('compose') }}" class="nav-link">Compose</a></li>
+      </ul>
+      <div class="sidebar-foot">
+        {% if session.get('email_user') %}
+        <a href="{{ url_for('logout') }}" class="signout">Logout</a>
+        {% else %}
+        <a href="{{ url_for('login') }}" class="signout">Login</a>
+        {% endif %}
+      </div>
+    </nav>
+
+    <main id="content" class="content">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-wrap">
+            {% for category, message in messages %}
+              <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <div class="page-area">
+        {% block content %}{% endblock %}
+      </div>
+
+    </main>
+
   </div>
-</nav>
 
-<!-- flash -->
-<div class="container mt-3">
-  {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      {% for category, message in messages %}
-        <div class="alert {{ category }}">
-          {{ message }}
-        </div>
-      {% endfor %}
-    {% endif %}
-  {% endwith %}
-</div>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script>
+  if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/static/other/sw.js', { scope: '/' })
+      .then(reg => console.log('PWA registered at /'))
+      .catch(err => console.error('PWA NOT', err));
+  }
+  </script>
 
-<!-- main -->
-<div class="container">
-  {% block content %}{% endblock %}
-</div>
-
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
-<script>
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/static/other/sw.js', { scope: '/' })
-    .then(reg => console.log('PWA registered at /'))
-    .catch(err => console.error('PWA NOT', err));
-}
-</script>
 </body>
 </html>

@@ -1,13 +1,30 @@
 {% extends "base.html" %}
+{% block title %}{{ subject }} - Mail{% endblock %}
 {% block content %}
-<div class="card">
-  <div class="card-header">
-    <strong>{{ email.subject }}</strong>
-    <div class="text-muted small">From: {{ email.from }} | {{ email.date }}</div>
+
+<div class="email-view">
+  <div class="view-header">
+    <a href="{{ url_for('inbox') }}" class="back">← Back</a>
+    <h2 class="view-subject">{{ email.subject }}</h2>
   </div>
-  <div class="card-body">
-    {{ email.body|safe }}
+
+  <div class="view-meta">
+    <div class="meta-item"><strong>From</strong> {{ email.from }}</div>
+    <div class="meta-item"><strong>To</strong> {{ email.to }}</div>
+    <div class="meta-item"><strong>Date</strong> {{ email.date }}</div>
+  </div>
+
+  <div class="view-body">
+    {{ email.body | safe }}
+  </div>
+
+  <div class="view-actions">
+    <a href="{{ url_for('compose') }}?reply_to={{ from_addr }}&subject=Re:%20{{ subject }}" class="btn">Reply</a>
+    <a href="{{ url_for('compose') }}?forward={{ email_id }}" class="btn">Forward</a>
+    <!-- <form method="post" action="" style="display:inline">
+      <button type="submit" class="btn danger">Delete</button>
+    </form> -->
   </div>
 </div>
-<a href="{{ url_for('inbox') }}" class="btn btn-secondary mt-3">Back to Inbox</a>
+
 {% endblock %}
