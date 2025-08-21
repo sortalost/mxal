@@ -50,7 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
   inboxTableBody.parentElement.prepend(newEmailNotif);
 
   // Track the latest email ID (handle empty inbox)
-  let latestEmailId = inboxTableBody.firstChild?.getAttribute("href")?.split("/").pop() || 0;
+  let firstRow = inboxTableBody.firstElementChild; // <a> instead of text node
+  let latestEmailId = firstRow?.getAttribute("href")?.split("/").pop() || 0;
 
   // Append or prepend messages
   function appendMessages(messages, prepend = true) {
