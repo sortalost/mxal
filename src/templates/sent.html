@@ -1,52 +1,74 @@
 {% extends "base.html" %}
+{% block title %}Inbox - Mail{% endblock %}
 {% block content %}
-<h2 class="mb-3">Sent</h2>
 
-<!-- Desktop view -->
-<div class="table-responsive d-none d-md-block">
-  <table class="table table-hover align-middle">
-      <thead class="table-dark">
-          <tr>
-              <th>To</th>
-              <th>Subject</th>
-              <th>Date</th>
-          </tr>
-      </thead>
-        <tbody id="sent-table-body">
-        {% for msg in messages %}
-            <tr>
-                <td class="text-truncate" style="max-width: 150px;">{{ msg.to }}</td>
-                <td><a href="{{ url_for('view_email', folder='Sent', email_id=msg.id) }}" class="text-decoration-none">{{ msg.subject }}</a></td>
-                <td>{{ msg.date }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-  </table>
+<div class="page-header">
+  <h1>Sent</h1>
+  <div class="header-actions">
+    <!-- <button id="refresh-btn" class="btn">Refresh</button> -->
+    <div class="small-muted">{{ messages|length }} messages</div>
+  </div>
 </div>
 
-<!-- Mobile view -->
-<div id="sent-mobile-list" class="d-block d-md-none">
-    {% for msg in messages %}
-    <a href="{{ url_for('view_email', folder='Sent', email_id=msg.id) }}" class="text-decoration-none text-dark">
-      <div class="card mb-2 shadow-sm">
-        <div class="card-body">
-          <div class="fw-bold text-truncate">{{ msg.subject }}</div>
-          <div class="small text-muted">{{ msg.to }}</div>
-          <div class="small">{{ msg.date }}</div>
+<!-- <div class="desktop-layout d-desktop">
+  <aside class="list-sidebar">
+    <div class="list-section-title">Folders</div>
+    <ul class="mini-nav">
+      <li><a href="{{ url_for('inbox') }}">Inbox</a></li>
+      <li><a href="{{ url_for('sent') }}">Sent</a></li>
+    </ul>
+  </aside> -->
+
+  <section class="list-pane">
+    <div class="list-rows" id="inbox-table-body">
+      {% for msg in messages %}
+      <a href="{{ url_for('view_email', folder='Sent', email_id=msg.id) }}" class="list-row">
+        <div class="row-left">
+          <div class="from">{{ msg.from }}</div>
         </div>
-      </div>
+        <div class="row-center">
+          <div class="subject">{{ msg.subject }}</div>
+        </div>
+        <div class="row-right">
+          <div class="date">{{ msg.date }}</div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+
+    <div class="list-footer">
+      <button id="load-more" class="btn primary">Load more</button>
+    </div>
+  </section>
+</div>
+
+<div class="mobile-layout d-mobile">
+  <div class="card-list" id="inbox-mobile-list">
+    {% for msg in messages %}
+    <a href="{{ url_for('view_email', folder='Sent', email_id=msg.id) }}" class="card-link">
+      <article class="card">
+        <div class="card-top">
+          <div class="subject">{{ msg.subject }}</div>
+          <div class="date">{{ msg.date }}</div>
+        </div>
+        <div class="card-bottom">
+          <div class="from">{{ msg.from }}</div>
+        </div>
+      </article>
     </a>
     {% endfor %}
-</div>
+  </div>
 
-<div class="text-center mt-3">
-    <button id="load-more" class="btn btn-primary">load more</button>
+  <div class="mobile-footer">
+    <button id="load-more-mobile" class="btn primary">Load more</button>
+  </div>
 </div>
 
 <script>
-window.SENT_DATA = {
-    loadedCount: {{ total_count }},
-    limit: 15
+window.INBOX_DATA = {
+  loadedCount: {{ messages|length }},
+  limit: 15
 };
 </script>
+
 {% endblock %}

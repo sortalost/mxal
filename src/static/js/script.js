@@ -4,7 +4,7 @@ const page = window.location.pathname.split('/').filter(Boolean).pop();
 
 // Load More handler
 document.getElementById("load-more").addEventListener("click", () => {
-    fetch(`/poop?start=${loadedCount}&limit=${limit}`)
+    fetch(`/api/inbox?start=${loadedCount}&limit=${limit}`)
         .then(res => res.json())
         .then(data => {
             if (!Array.isArray(data) || data.length === 0) {
@@ -20,7 +20,7 @@ document.getElementById("load-more").addEventListener("click", () => {
 
 // Live refresh (every 30 seconds)
 setInterval(() => {
-    fetch(`/poop?start=0&limit=${limit}`)
+    fetch(`/api/inbox?start=0&limit=${limit}`)
         .then(res => res.json())
         .then(data => {
             if (!Array.isArray(data)) return;
