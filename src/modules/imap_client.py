@@ -33,11 +33,12 @@ def fetch_folder(user, password, folder, start=0, limit=10):
             "id": eid.decode(),
             "from": msg["From"],
             "subject": msg["Subject"],
-            "date": parsedate_to_datetime(msg["Date"].strftime("%D")
+            "date": parsedate_to_datetime(msg["Date"].strftime("%D"))
         })
     mail.close()
     mail.logout()
     return messages, len(email_ids)
+
 
 def fetch_email(user, password, email_id, folder):
     mail = imaplib.IMAP4_SSL(IMAP_SERVER, IMAP_PORT)
