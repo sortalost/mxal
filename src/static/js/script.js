@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const loadMoreMobileBtn = document.getElementById("load-more-mobile");
   const inboxMobileList = document.getElementById("inbox-mobile-list");
 
+  const page = window.location.pathname.replace(/\/$/, '').split('/').pop();
+
   async function fetchMoreEmails() {
     const start = window.INBOX_DATA.loadedCount;
     const limit = window.INBOX_DATA.limit;
@@ -25,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Append new messages to desktop layout
       messages.forEach(msg => {
         const row = document.createElement("a");
-        row.href = `/view_email/inbox/${msg.id}`;
+        row.href = `/${page}/${msg.id}`;
         row.className = "list-row";
         row.innerHTML = `
           <div class="row-left">
@@ -45,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (inboxMobileList) {
         messages.forEach(msg => {
           const cardLink = document.createElement("a");
-          cardLink.href = `/view_email/inbox/${msg.id}`;
+          cardLink.href = `/${page}/${msg.id}`;
           cardLink.className = "card-link";
           cardLink.innerHTML = `
             <article class="card">
