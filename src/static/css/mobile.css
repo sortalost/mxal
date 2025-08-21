@@ -53,3 +53,6 @@ body{
 
 .d-desktop{display:none}
 .d-mobile{display:block}
+
+.list-rows{display: none}
+.list-pane{display: none}
