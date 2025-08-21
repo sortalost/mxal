@@ -38,8 +38,10 @@ def inbox():
         msglength = len(messages)
     )
 
-@app.route("/api/inbox")
-def api_inbox():
+@app.route("/api/<folder>")
+def api_folder(folder):
+    if not folder.lower() in ['inbox','sent']:
+        return {'error':'invalid folder, must be inbox or sent.'}
     if not session.get('email_user'):
         return jsonify({'error':'not logged in'}), 401
     start = int(request.args.get("start", 0))
@@ -47,7 +49,7 @@ def api_inbox():
     messages, _ = fetch_folder(
         session["email_user"],
         session["email_pass"],
-        "inbox",
+        folder,
         start=start,
         limit=limit
     )
