@@ -56,3 +56,11 @@ body{
 
 .list-rows{display: none}
 .list-pane{display: none}
+
+.email-view{max-width:900px;margin:0 auto;background:transparent}
+.view-header{display:flex;align-items:center;gap:12px}
+.back{color:var(--link);text-decoration:none}
+.view-subject{margin:0;color:#fff}
+.view-meta{display:flex;gap:12px;margin:12px 0;color:#ccc;flex-wrap:wrap}
+.view-body{background:#fff;color:#111;border-radius:8px;padding:18px;line-height:1.5}
+.view-actions{margin-top:12px;display:flex;gap:8px}
