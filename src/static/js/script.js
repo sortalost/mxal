@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const limit = window.INBOX_DATA.limit;
 
     try {
-      const response = await fetch(`/api/inbox?start=${start}&limit=${limit}`);
+      const response = await fetch(`/api/${page}?start=${start}&limit=${limit}`);
       if (!response.ok) throw new Error("Failed to fetch emails");
 
       const messages = await response.json();
