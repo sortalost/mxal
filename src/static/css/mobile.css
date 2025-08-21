@@ -57,8 +57,8 @@ body{
 .list-rows{display: none}
 .list-pane{display: none}
 
-.email-view{max-width:900px;margin:0 auto;background:transparent}
-.view-header{display:flex;align-items:center;gap:12px}
+.email-view{width:90%;margin:0 auto;background:transparent}
+.view-header{display: flex;align-items: flex-start;gap: 12px;flex-direction: column;}
 .back{color:var(--link);text-decoration:none}
 .view-subject{margin:0;color:#fff}
 .view-meta{display:flex;gap:12px;margin:12px 0;color:#ccc;flex-wrap:wrap}
