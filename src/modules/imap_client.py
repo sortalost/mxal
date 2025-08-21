@@ -1,5 +1,6 @@
 import imaplib
 import email
+from email.utils import parsedate_to_datetime
 
 IMAP_SERVER = "mail.cock.li"
 IMAP_PORT = 993
@@ -32,7 +33,7 @@ def fetch_folder(user, password, folder, start=0, limit=10):
             "id": eid.decode(),
             "from": msg["From"],
             "subject": msg["Subject"],
-            "date": msg["Date"]
+            "date": parsedate_to_datetime(msg["Date"],fmt="%D")
         })
     mail.close()
     mail.logout()
@@ -65,6 +66,6 @@ def fetch_email(user, password, email_id, folder):
     return {
         "from": msg["From"],
         "subject": msg["Subject"],
-        "date": msg["Date"],
+        "date": parsedate_to_datetime(msg["Date"], fmt="%d %B, %Y @ %I:%M %p"),
         "body": body_html if body_html else f"<pre>{body_plain}</pre>"
     }
