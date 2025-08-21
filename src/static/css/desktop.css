@@ -119,3 +119,8 @@ body{
 
 .d-desktop{display:flex}
 .d-mobile{display:none}
+
+.view-body pre {
+    white-space: pre-wrap;  /* wraps long lines */
+    word-wrap: break-word;
+}
