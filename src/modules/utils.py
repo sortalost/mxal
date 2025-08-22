@@ -18,20 +18,21 @@ troubleshootmsg = {
     'date':'now',
     'from':'God (real)',
     'body':f'''\
-    Go back and see the subject, based on that, see below:
-
-    1. "COCKBLOCKED 🚨"
-        -> Your email is cockblocked, ie, you cannot send emails. Go to <a href="https://cock.li/unblock" target="_blank">cock.li</a> to unblock. However, you can still receive emails.
+<pre style='white-space: pre-line;'>
+<h2>Go back and see the subject, based on that, see below:</h2>
+<h3>1. "COCKBLOCKED 🚨"</h3>
+<p>-> Your email is cockblocked, ie, you cannot send emails. Go to <a href="https://cock.li/unblock" target="_blank">cock.li</a> to unblock. However, you can still receive emails.</p>
     
-    2. "EMPTY INBOX 📤"
-        -> The "Inbox" folder is empty, ie, you have not received any emails yet. That's sad (maybe).
+<h3>2. "EMPTY INBOX 📤"</h3>
+<p>-> The "Inbox" folder is empty, ie, you have not received any emails yet. That's sad (maybe).</p>
     
-    3. "NOTHING SENT👀"
-        -> The "Sent" folder does not exist, so, you (probably) haven\'t sent any emails yet. Go send some emails. You must NOT be cockblocked by the way.
-
-    If you see something unexpected, let <a href="//sortalost.is-a.dev/contact" target="_blank">me</a> know.
-    Peace.
-    '''
+<h3>3. "NOTHING SENT👀"</h3>
+<p>-> The "Sent" folder does not exist, so, you (probably) haven't sent any emails yet. Go send some emails. You must NOT be cockblocked by the way.</p>
+<hr>
+<p>If you see something unexpected, let <a href="//sortalost.is-a.dev/contact" target="_blank">me</a> know.</p>
+<p>Peace.</p>
+</pre>
+'''
 }
 
 

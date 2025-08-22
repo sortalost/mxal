@@ -111,7 +111,6 @@ def view_email(folder, email_id):
     try:
         email_data = fetch_email(session["email_user"], session["email_pass"], email_id, folder)
     except Exception as e:
-        flash(f"error: {e}")
         email_data = troubleshootmsg
     return render_template("view_email.html", email=email_data)
 
