@@ -4,17 +4,22 @@
 
 <div>
     {% if session.get('logged_in') %}
-        <p>you are logged in.</p>
-        <p>
-            <a href="/inbox">INBOX</a>
-            <a href="/sent">SENT</a>
-            <a href="/compose">COMPOSE</a>
-        </p>
-    {% else %}
-        <p>basic email client for cock.li since their web interface doesnt work due to a roundcube vulnerability.</p>
-        <p>login using your cock.li credentials.</p>
-        <p>open sourced on <a href="//github.com/sortalost/mxal">github</a>.</p>
+        <p>You are logged in.</p>
+        <p><a href="/inbox">INBOX</a></p>
+        <p><a href="/sent">SENT</a></p>
+        <p><a href="/compose">COMPOSE</a></p>
+        <hr>
     {% endif %}
+    <h2>What?</h2>
+    <p>Basic web client for <a href="//cock.li" target="_blank">cock.li</a>.</p>
+    <h2>Why?</h2>
+    <p>Because <a href="//mail.cock.li" target="_blank">their</a> web client is offline due to a Roundcube <a href="https://cock.li/log.txt">vulnerability</a>.</p>
+    <h2>How?</h2>
+    <p>Login using your cock.li credentials (You must have an account, new accounts cannot be created).</p>
+    <h2>more...</h2>
+    <p>Not affiliated with them.</p>
+    <p>Open sourced on <a href="//github.com/sortalost/mxal">GitHub</a>.</p>
+    <p>Why name "MXAL"? I don't know, I cannot think of anything else.</p>
 </div>
 
 {% endblock %}
