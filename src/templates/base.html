@@ -15,7 +15,7 @@
   <div id="app-root">
     <header class="topbar">
       <button id="hamburger" class="hamburger" aria-label="menu">☰</button>
-      <div class="topbar-title">{{ session.get('email_user') or 'mxal' }}</div>
+      <div onclick="navigator.clipboard.writeText(this.innerText)" class="topbar-title">{{ session.get('email_user') or 'mxal' }}</div>
       <div class="topbar-actions">
         {% if session.get('logged_in') %}
           <button title="not implemented yet." id="search-toggle" class="icon-btn" aria-label="search">🔍</button>
