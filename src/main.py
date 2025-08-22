@@ -52,12 +52,11 @@ def inbox():
         total_count = 1
     next_start = start + limit if start + limit < total_count else None
     prev_start = start - limit if start - limit >= 0 else None
-    finalmsg = messages.insert(0, cockblockmsg)
-    print(messages)
-    print(finalmsg)
+    if session.get('cockblock'):
+        messages.insert(0,cockblockmsg)
     return render_template(
         "inbox.html",
-        messages=finalmsg or [cockblockmsg],
+        messages=messages,
         next_start=next_start,
         prev_start=prev_start,
         msglength = total_count
@@ -85,7 +84,9 @@ def sent():
             }
         ]
         total_count = 1
-    return render_template("sent.html", messages=messages.insert(0,cockblockmsg), total_count=total_count)
+    if session.get('cockblock'):
+        messages.insert(0,cockblockmsg)
+    return render_template("sent.html", messages=messages, total_count=total_count)
 
 
 @app.route("/compose", methods=["GET", "POST"])
@@ -128,13 +129,16 @@ def view_email(folder, email_id):
 def api_inbox():
     start = int(request.args.get("start", 0))
     limit = int(request.args.get("limit", 10))
-    messages, _ = fetch_folder(
-        session["email_user"],
-        session["email_pass"],
-        "inbox",
-        start=start,
-        limit=limit
-    )
+    try:
+        messages, _ = fetch_folder(
+            session["email_user"],
+            session["email_pass"],
+            "inbox",
+            start=start,
+            limit=limit
+        )
+    except Exception as e:
+        return {'error':str(e)}
     return jsonify(messages)
 
 
@@ -143,13 +147,16 @@ def api_inbox():
 def api_sent():
     start = int(request.args.get("start", 0))
     limit = int(request.args.get("limit", 10))
-    messages, _ = fetch_folder(
-        session["email_user"],
-        session["email_pass"],
-        "Sent",
-        start=start,
-        limit=limit
-    )
+    try:
+        messages, _ = fetch_folder(
+            session["email_user"],
+            session["email_pass"],
+            "Sent",
+            start=start,
+            limit=limit
+        )
+    except Exception as e:
+        return {'error':str(e)}
     return jsonify(messages)
 
 
