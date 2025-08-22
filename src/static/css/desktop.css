@@ -108,8 +108,8 @@ body{
 .view-body{background:#fff;color:#111;border-radius:8px;padding:18px;line-height:1.5}
 .view-actions{margin-top:12px;display:flex;gap:8px}
 
-.compose-card{max-width:900px;margin:0 auto}
-.compose-form{background:#fff;padding:14px;border-radius:10px;color:#111;display:flex;flex-direction:column;gap:12px}
+.compose-card{width:90%;margin:0 auto}
+.compose-form{background:#ebebeb;padding:14px;border-radius:10px;color:#111;display:flex;flex-direction:column;gap:12px}
 .field label{display:block;font-weight:600;color:#333;margin-bottom:6px}
 .field input,.field textarea{border:1px solid #ddd;padding:10px;border-radius:8px}
 .field .file-label{display:inline-block;padding:6px 10px;border:1px dashed #ccc;border-radius:8px;cursor:pointer;color:#666}

@@ -57,6 +57,13 @@ body{
 .list-rows{display: none}
 .list-pane{display: none}
 
+.compose-card{width:100%;margin:0 auto}
+.compose-form{overflow-x:clip;background:#ebebeb;padding:14px;border-radius:10px;color:#111;display:flex;flex-direction:column;gap:12px}
+.field label{display:block;font-weight:600;color:#333;margin-bottom:6px}
+.field input,.field textarea{width:100%;border:1px solid #ddd;padding:10px;border-radius:8px}
+.field .file-label{display:inline-block;padding:6px 10px;border:1px dashed #ccc;border-radius:8px;cursor:pointer;color:#666}
+
+
 .email-view{width:90%;margin:0 auto;background:transparent}
 .view-header{display: flex;align-items: flex-start;gap: 12px;flex-direction: column;}
 .back{color:var(--link);text-decoration:none}
