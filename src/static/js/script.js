@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const hamburger = document.getElementById('hamburger');
   const sidebar = document.getElementById("sidebar");
   const msgLength = document.getElementById('msg-length');
+  const refreshBtn = document.getElementById('refreshBtn');
   
 
   // Detect current folder dynamically (e.g. "inbox", "sent")
@@ -41,6 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
       window.INBOX_DATA.loadedCount += messages.length;
       msgLength.innerText=window.INBOX_DATA.loadedCount
       msgLength.style.color="rgba(0, 99, 61, 0.99)"
+      if (loadMoreBtn) loadMoreBtn.innerHTML = 'load more';
+      if (loadMoreMobileBtn) loadMoreMobileBtn.innerHTML = 'load more';
     } catch (err) {
       console.error("Error loading more emails:", err);
       msgLength.style.color="#f00"
@@ -50,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (loadMoreBtn) loadMoreBtn.addEventListener("click", fetchMoreEmails);
   if (loadMoreMobileBtn) loadMoreMobileBtn.addEventListener("click", fetchMoreEmails);
+  if (refreshBtn) refreshBtn.addEventListener("click", fetchMoreEmails);
   if (hamburger) hamburger.addEventListener("click", () => {
     sidebar.style.display = sidebar.style.display === "none" ? "block" : "none";
   });

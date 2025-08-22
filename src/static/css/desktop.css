@@ -83,7 +83,7 @@ body{
 .mini-nav{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
 .mini-nav a{text-decoration:none;color:var(--accent);padding:8px;border-radius:6px}
 
-.list-pane{flex:1;background:#ffffff;border-radius:12px;padding:8px;display:flex;flex-direction:column;overflow:hidden}
+.list-pane{flex:1;background:#ffffff;border-radius:12px;padding:8px;display:flex;flex-direction:column}
 .list-rows{overflow-wrap:anywhere;flex:1;padding:6px}
 .list-row{background:#eee;display:flex;gap:12px;align-items:center;padding:12px;border-radius:8px;color:#111;text-decoration:none;border-bottom:1px solid rgba(0,0,0,0.04)}
 .list-row:hover{background:#fff;border:#333 1px dashed;}
@@ -125,4 +125,13 @@ body{
 .view-body pre {
     white-space: pre-wrap;  /* wraps long lines */
     word-wrap: break-word;
+}
+
+button:disabled {opacity: 0.6;cursor: not-allowed;}
+
+.spinner {border: 2px solid #f3f3f3; /* Light grey */border-top: 2px solid #333; /* Dark part */border-radius: 50%;width: 14px;height: 14px;animation: spin 0.6s linear infinite;display: inline-block;vertical-align: middle;}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

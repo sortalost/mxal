@@ -73,3 +73,12 @@ body{
 .view-meta{display:flex;gap:12px;margin:12px 0;color:#ccc;flex-wrap:wrap}
 .view-body{background:#fff;color:#111;border-radius:8px;padding:18px;line-height:1.5}
 .view-actions{margin-top:12px;display:flex;gap:8px}
+
+button:disabled {opacity: 0.6;cursor: not-allowed;}
+
+.spinner {border: 2px solid #f3f3f3; /* Light grey */border-top: 2px solid #333; /* Dark part */border-radius: 50%;width: 14px;height: 14px;animation: spin 0.6s linear infinite;display: inline-block;vertical-align: middle;}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
