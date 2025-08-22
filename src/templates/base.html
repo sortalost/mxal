@@ -42,6 +42,7 @@
         <p><a href='/'>About</a></p>
         <p><a href='//github.com/sortalost/mxal'>GitHub</a></p>
         <p><a href="{{ url_for('logout') }}" class="signout">Logout</a></p>
+        <p><a href='{{commit.url}}' target="_blank"><small>commit:{{commit.sha}}</small></a></p>
       </div>
     </nav>
 
@@ -62,7 +63,7 @@
 
   </div>
   <div class="footer">
-    <p><a href="{{commit.url}}" target="_blank">{{commit.sha}}: {{commit.message}}</a></p>
+    <p>Last <a href="{{commit.url}}" target="_blank">update</a> on {{commit.date}}</p>
   </div>
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   <script>

@@ -11,7 +11,7 @@ def login_required(f):
             if request.is_json or request.headers.get("X-Requested-With") == "XMLHttpRequest":
                 return jsonify({"success": False, "message": "Login required"}), 401
             else:
-                flash(f"login to access this page.", "danger")
+                flash(f"Login required", "danger")
                 return redirect(url_for("login"))
         return f(*args, **kwargs)
     return decorated_function
@@ -32,5 +32,5 @@ def fetch_commit():
             "url": latest["html_url"]
         }
     except Exception as e:
-        flash(e)
+        flash(f"failed to fetch commit: {e}")
         return {"message":"failed to fetch.","sha":"none","author":"none","date":"none","url":"none"}

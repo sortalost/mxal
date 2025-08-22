@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from .modules.imap_client import fetch_folder, test_login, fetch_email
 from .modules.smtp_client import send_email
 from .modules.utils import login_required, fetch_commit
+import smtplib
 
 
 app = Flask(__name__)
@@ -26,7 +27,7 @@ def login():
             session["logged_in"] = True
             return redirect(url_for("inbox"))
         else:
-            flash("Login failed. Check your credentials.", "danger")
+            flash("Wrong credentials", "danger")
     return render_template("login.html")
 
 
@@ -35,7 +36,20 @@ def login():
 def inbox():
     start = int(request.args.get("start", 0))
     limit = 10
-    messages, total_count = fetch_folder(session["email_user"], session["email_pass"], "inbox", start=start, limit=limit)
+    try:
+        messages, total_count = fetch_folder(session["email_user"], session["email_pass"], "inbox", start=start, limit=limit)
+    except:
+        flash("No emails.")
+        messages = [
+            {
+                'id':0,
+                'subject':'empty inbox :/',
+                'date':'now',
+                'from':'God (real)',
+                'body':'You have not received any email yet. That\'s sad, maybe. Peace :)'
+            }
+        ]
+        total_count = 1
     next_start = start + limit if start + limit < total_count else None
     prev_start = start - limit if start - limit >= 0 else None
     return render_template(
@@ -50,11 +64,24 @@ def inbox():
 @app.route("/sent")
 @login_required
 def sent():
-    messages, total_count = fetch_folder(
-        session["email_user"],
-        session["email_pass"],
-        "Sent"
-    )
+    try:
+        messages, total_count = fetch_folder(
+            session["email_user"],
+            session["email_pass"],
+            "Sent"
+        )
+    except:
+        flash("Nothing sent yet")
+        messages = [
+            {
+                'id':0,
+                'subject':'Nothing sent yet (?)',
+                'date':'now',
+                'from':'God (real)',
+                'body':'You probably haven\'t sent any emails yet. (If you think this is an error, let <a href="mailto:sortalost@cock.li">me</a> know). Peace :)'
+            }
+        ]
+        total_count = 1
     return render_template("sent.html", messages=messages, total_count=total_count)
 
 
@@ -65,9 +92,22 @@ def compose():
         to = request.form["to"]
         subject = request.form["subject"]
         body = request.form["body"]
-        send_email(session["email_user"], session["email_pass"], to, subject, body)
-        flash("Email sent!", "success")
-        return redirect(url_for("inbox"))
+        try:
+            send_email(session["email_user"], session["email_pass"], to, subject, body)
+            flash("Email sent!", "success")
+            return redirect(url_for("inbox"))
+        except smtplib.SMTPDataError:
+            flash("COCKBLOCKED 🚨")
+            messages = [
+                {
+                    'id':0,
+                    'subject':'you are cockblocked :(',
+                    'date':'now',
+                    'from':'God (real)',
+                    'body':'Your email is cockblocked, ie, you cannot send emails. Go to <a href="https://cock.li/unblock">cock.li</a> to unblock. However, you can still receive emails. That\'s sad, maybe. Peace :)'
+                }
+            ]
+            total_count = 1
     return render_template("compose.html")
 
 
@@ -112,6 +152,7 @@ def api_sent():
 @app.route("/logout")
 @login_required
 def logout():
+    flash("Logged out")
     session.clear()
     return redirect(url_for("index"))
 
