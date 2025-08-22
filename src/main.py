@@ -57,7 +57,7 @@ def inbox():
         messages=messages.insert(0, cockblockmsg),
         next_start=next_start,
         prev_start=prev_start,
-        msglength = len(messages)
+        msglength = total_count
     )
 
 
@@ -82,7 +82,7 @@ def sent():
             }
         ]
         total_count = 1
-    return render_template("sent.html", messages=messages, total_count=total_count)
+    return render_template("sent.html", messages=messages.insert(0,cockblockmsg), total_count=total_count)
 
 
 @app.route("/compose", methods=["GET", "POST"])

@@ -5,7 +5,7 @@
 <div class="page-header">
   <h1>Inbox</h1>
   <div class="header-actions">
-    <div class="small-muted">[ <span id="msg-length">{{ messages|length }}</span> email(s) loaded ]</div>
+    <div class="small-muted">[ <span id="msg-length">{{ msgLength }}</span> email(s) loaded ]</div>
     <button id="refresh-btn" class="btn">refresh</button>
   </div>
 </div>
@@ -57,7 +57,7 @@
 
 <script>
 window.INBOX_DATA = {
-  loadedCount: {{ messages|length }},
+  loadedCount: {{ msgLength }},
   limit: 15
 };
 </script>
