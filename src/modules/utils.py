@@ -4,6 +4,16 @@ from functools import wraps
 from datetime import datetime
 from flask import session, request, jsonify, flash, redirect, url_for
 
+
+cockblockmsg = {
+    'id':0,
+    'subject':'you are cockblocked :(',
+    'date':'now',
+    'from':'God (real)',
+    'body':'Your email is cockblocked, ie, you cannot send emails. Go to <a href="https://cock.li/unblock">cock.li</a> to unblock. However, you can still receive emails. That\'s sad, maybe. Peace :)'
+}
+
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):

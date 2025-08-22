@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from .modules.imap_client import fetch_folder, test_login, fetch_email
 from .modules.smtp_client import send_email
-from .modules.utils import login_required, fetch_commit
+from .modules.utils import login_required, fetch_commit, cockblockmsg
 import smtplib
 
 
@@ -54,7 +54,7 @@ def inbox():
     prev_start = start - limit if start - limit >= 0 else None
     return render_template(
         "inbox.html",
-        messages=messages,
+        messages=messages.insert(0, cockblockmsg),
         next_start=next_start,
         prev_start=prev_start,
         msglength = len(messages)
@@ -98,16 +98,7 @@ def compose():
             return redirect(url_for("inbox"))
         except smtplib.SMTPDataError:
             flash("COCKBLOCKED 🚨")
-            messages = [
-                {
-                    'id':0,
-                    'subject':'you are cockblocked :(',
-                    'date':'now',
-                    'from':'God (real)',
-                    'body':'Your email is cockblocked, ie, you cannot send emails. Go to <a href="https://cock.li/unblock">cock.li</a> to unblock. However, you can still receive emails. That\'s sad, maybe. Peace :)'
-                }
-            ]
-            total_count = 1
+            session['cockblock']=True
     return render_template("compose.html")
 
 
