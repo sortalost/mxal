@@ -174,4 +174,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Poll every 30 seconds
   setInterval(fetchNewEmails, 30000);
+  hamburger.click()
 });
