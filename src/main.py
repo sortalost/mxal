@@ -114,8 +114,18 @@ def compose():
 @app.route("/view/<folder>/<email_id>")
 @login_required
 def view_email(folder, email_id):
-    folder=folder.title() 
-    email_data = fetch_email(session["email_user"], session["email_pass"], email_id, folder)
+    folder=folder.title()
+    try:
+        email_data = fetch_email(session["email_user"], session["email_pass"], email_id, folder)
+    except Exception as e:
+        flash(f"error: {e}")
+        messages = {
+            'id':0,
+            'subject':'boohoo',
+            'date':'now',
+            'from':'God (real)',
+            'body':'some error in /view'
+        }
     return render_template("view_email.html", email=email_data)
 
 
