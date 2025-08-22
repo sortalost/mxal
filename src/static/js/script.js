@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (refreshBtn) refreshBtn.addEventListener("click", fetchMoreEmails);
   if (hamburger) hamburger.addEventListener("click", () => {
     // sidebar.style.display = sidebar.style.display === "none" ? "flex" : "none";
-    sidebar.classList.toggle("open");
+    sidebar.classList.toggle("closed");
   });
 
   // --- DOM APPEND/PREPEND HELPERS ---
@@ -174,5 +174,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Poll every 30 seconds
   setInterval(fetchNewEmails, 30000);
-  hamburger.click()
 });
