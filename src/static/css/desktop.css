@@ -86,7 +86,7 @@ body{
 .list-pane{flex:1;background:#ffffff;border-radius:12px;padding:8px;display:flex;flex-direction:column;overflow:hidden}
 .list-rows{overflow-wrap:anywhere;flex:1;padding:6px}
 .list-row{background:#eee;display:flex;gap:12px;align-items:center;padding:12px;border-radius:8px;color:#111;text-decoration:none;border-bottom:1px solid rgba(0,0,0,0.04)}
-.list-row:hover{background:#fff;border:#333}
+.list-row:hover{background:#fff;border:#333 1px dashed;}
 .list-row a:visited {background:#ddd;color:#222222}
 .row-left{overflow-wrap: anywhere;width:22%;font-weight:700;color:#222}
 .row-center{flex:1}
