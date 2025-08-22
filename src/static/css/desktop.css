@@ -132,4 +132,4 @@ button:disabled {opacity: 0.6;cursor: not-allowed;}
   100% { transform: rotate(360deg); }
 }
 
-.footer {font-size: smaller;background-color: #1d1d1d;color: #5e5e5e;text-align: center;line-height: 0;padding: 0px;position: fixed;left: 0;bottom: 0;width: 100%;z-index: 1000;}
+.footer {font-size: smaller;background-color: var(--panel);color: var(--muted);text-align: center;line-height: 0;padding: 0px;position: fixed;left: 0;bottom: 0;width: 100%;z-index: 1000;}

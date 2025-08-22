@@ -65,3 +65,4 @@ a {text-decoration:underline;cursor:pointer;color: var(--link);font-weight: 600}
 button:disabled{opacity:.6;cursor:not-allowed}
 .spinner{border:2px solid #f3f3f3;border-top:2px solid #333;border-radius:50%;width:14px;height:14px;animation:spin .6s linear infinite;display:inline-block;vertical-align:middle}
 @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.footer {font-size: smaller;background-color: var(--panel);color: var(--muted);text-align: center;line-height: 0;padding: 0px;position: fixed;left: 0;bottom: 0;width: 100%;z-index: 1000;}

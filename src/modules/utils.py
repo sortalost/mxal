@@ -20,7 +20,7 @@ def login_required(f):
 def fetch_commit():
     url = f"https://api.github.com/repos/sortalost/mxal/commits"
     try:
-        res = requests.get(url, headers=headers ,timeout=5)
+        res = requests.get(url, headers={} ,timeout=5)
         res.raise_for_status()
         latest = res.json()[0]
         dt_obj = datetime.fromisoformat(latest["commit"]["author"]["date"].replace("Z", "+00:00"))
@@ -33,7 +33,7 @@ def fetch_commit():
             "ago":time_ago(dt_obj)
         }
     except Exception as e:
-        print("Failed to fetch commit:", e)
+        flash(e)
         return {"message":"failed to fetch.","sha":"none","author":"none","date":"none","url":"none","ago":"none"}
 
 
