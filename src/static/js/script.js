@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!inboxTableBody) return;
     const start = window.INBOX_DATA.loadedCount;
     const limit = window.INBOX_DATA.limit;
+    if (loadMoreBtn) loadMoreBtn.innerHTML = '<span class="spinner"></span>';
+    if (loadMoreMobileBtn) loadMoreMobileBtn.innerHTML = '<span class="spinner"></span>';
 
     try {
       const response = await fetch(`/api/${page}?start=${start}&limit=${limit}`);
@@ -24,14 +26,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const messages = await response.json();
 
       if (!messages.length) {
-        if (loadMoreBtn) loadMoreBtn.disabled = true;
-        if (loadMoreMobileBtn) loadMoreMobileBtn.disabled = true;
+        if (loadMoreBtn) {
+          loadMoreBtn.disabled = true;
+          loadMoreBtn.innerHTML = "no more"
+        }
+        if (loadMoreMobileBtn) {
+          loadMoreMobileBtn.disabled = true;
+          loadMoreMobileBtn.innerHTML = "no more";
+        }
         return;
       }
 
       appendMessages(messages, false); // append to bottom
       window.INBOX_DATA.loadedCount += messages.length;
       msgLength.innerText=window.INBOX_DATA.loadedCount
+      msgLength.style.color="rgba(0, 99, 61, 0.99)"
     } catch (err) {
       console.error("Error loading more emails:", err);
       msgLength.style.color="#f00"
