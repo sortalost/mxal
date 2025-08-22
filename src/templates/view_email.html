@@ -19,8 +19,8 @@
   </div>
 
   <div class="view-actions">
-    <a href="{{ url_for('compose') }}?reply_to={{ from_addr }}&subject=Re:%20{{ subject }}" class="btn">Reply</a>
-    <a href="{{ url_for('compose') }}?forward={{ email_id }}" class="btn">Forward</a>
+    <a href="{{ url_for('compose') }}?reply_to={{ email.from }}&subject=Re:%20{{ email.subject }}" class="btn">Reply</a>
+    <a href="{{ url_for('compose') }}?forward={{ email.id }}" class="btn">Forward</a>
     <!-- <form method="post" action="" style="display:inline">
       <button type="submit" class="btn danger">Delete</button>
     </form> -->

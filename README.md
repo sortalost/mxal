@@ -3,3 +3,4 @@ basic email client for cock.li since their web interface doesnt work due to a ro
 
 ### todo
 - attachment handling (both, while sending and receiving)
+- delete emails

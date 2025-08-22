@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- DOM APPEND/PREPEND HELPERS ---
   function createDesktopRow(msg) {
     const row = document.createElement("a");
-    row.href = `/${page}/${msg.id}`;
+    row.href = `/view/${page}/${msg.id}`;
     row.className = "list-row";
     row.innerHTML = `
       <div class="row-left"><div class="from">${msg.from}</div></div>
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function createMobileCard(msg) {
     const cardLink = document.createElement("a");
-    cardLink.href = `/${page}/${msg.id}`;
+    cardLink.href = `/view/${page}/${msg.id}`;
     cardLink.className = "card-link";
     cardLink.innerHTML = `
       <article class="card">
