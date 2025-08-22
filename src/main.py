@@ -5,7 +5,7 @@ from .modules.smtp_client import send_email
 from .modules.utils import login_required
 
 app = Flask(__name__)
-app.secret_key = "secretkeylol"
+app.secret_key = os.getenv("secret_key")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -21,7 +21,13 @@ def login():
             flash("Login failed. Check your credentials.", "danger")
     return render_template("login.html")
 
+
 @app.route("/")
+def index():
+    return render_template("index.html")
+
+
+@app.route("/inbox")
 @login_required
 def inbox():
     # ?start
@@ -39,9 +45,8 @@ def inbox():
     )
 
 @app.route("/api/inbox")
+@login_required
 def api_inbox():
-    if not session.get('email_user'):
-        return jsonify({'error':'not logged in'}), 401
     start = int(request.args.get("start", 0))
     limit = int(request.args.get("limit", 10))
     messages, _ = fetch_folder(
@@ -55,9 +60,8 @@ def api_inbox():
 
 
 @app.route("/api/sent")
+@login_required
 def api_sent():
-    if not session.get('email_user'):
-        return jsonify({'error':'not logged in'}), 401
     start = int(request.args.get("start", 0))
     limit = int(request.args.get("limit", 10))
     messages, _ = fetch_folder(
@@ -84,8 +88,6 @@ def sent():
 @app.route("/compose", methods=["GET", "POST"])
 @login_required
 def compose():
-    if "email_user" not in session:
-        return redirect(url_for("login"))
     if request.method == "POST":
         to = request.form["to"]
         subject = request.form["subject"]
@@ -98,9 +100,7 @@ def compose():
 @app.route("/view/<folder>/<email_id>")
 @login_required
 def view_email(folder, email_id):
-    folder=folder.title()
-    if "email_user" not in session:
-        return redirect(url_for("login"))    
+    folder=folder.title() 
     email_data = fetch_email(session["email_user"], session["email_pass"], email_id, folder)
     return render_template("view_email.html", email=email_data)
 
@@ -109,7 +109,7 @@ def view_email(folder, email_id):
 @login_required
 def logout():
     session.clear()
-    return redirect(url_for("login"))
+    return redirect(url_for("index"))
 
 if __name__ == "__main__":
     app.run(debug=False)

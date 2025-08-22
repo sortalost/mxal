@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}home{% endblock %}
+{% block content %}
+
+<div>
+    {% if session.get('logged_in') %}
+        <p>you are logged in.</p>
+        <p>
+            <a href="/inbox">INBOX</a>
+            <a href="/sent">SENT</a>
+            <a href="/compose">COMPOSE</a>
+        </p>
+    {% else %}
+        <p>basic email client for cock.li since their web interface doesnt work due to a roundcube vulnerability.</p>
+        <p>login using your cock.li credentials.</p>
+        <p>open sourced on <a href="//github.com/sortalost/mxal">github</a>.</p>
+</div>
+
+{% endblock %}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{% block title %}Mail{% endblock %}</title>
+  <title>{% block title %}{% endblock %} | mxal</title>
   <link rel="manifest" href="{{ url_for('static', filename='other/manifest.json') }}">
   <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/mail_192.png') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/desktop.css') }}" media="screen and (min-width:769px)">
@@ -13,33 +13,35 @@
 <body>
 
   <div id="app-root">
-
     <header class="topbar">
       <button id="hamburger" class="hamburger" aria-label="menu">☰</button>
-      <div class="topbar-title">{{ session.get('email_user') or 'mail' }}</div>
+      <div class="topbar-title">{{ session.get('email_user') or 'mxal' }}</div>
       <div class="topbar-actions">
-        <button id="search-toggle" class="icon-btn" aria-label="search">🔍</button>
-        <button id="compose-fab" class="compose-fab" aria-label="compose">✉</button>
+        {% if session.get('logged_in') %}
+          <button id="search-toggle" class="icon-btn" aria-label="search">🔍</button>
+          <button id="compose-fab" class="compose-fab" aria-label="compose">✉</button>
+        {% else %}
+          <button onclick="window.location.href='/login'">login</button>
+        {% endif %}
       </div>
     </header>
 
-    <nav id="sidebar" class="sidebar">
-      <div class="sidebar-head">
-        <div class="brand">mail</div>
-      </div>
-      <ul class="nav-list">
-        <li><a href="{{ url_for('inbox') }}" class="nav-link">Inbox</a></li>
-        <li><a href="{{ url_for('sent') }}" class="nav-link">Sent</a></li>
-        <li><a href="{{ url_for('compose') }}" class="nav-link">Compose</a></li>
-      </ul>
-      <div class="sidebar-foot">
-        {% if session.get('email_user') %}
-        <a href="{{ url_for('logout') }}" class="signout">Logout</a>
-        {% else %}
-        <a href="{{ url_for('login') }}" class="signout">Login</a>
-        {% endif %}
-      </div>
-    </nav>
+    
+    {% if session.get('logged_in') %}
+      <nav id="sidebar" class="sidebar">
+        <div class="sidebar-head">
+          <div class="brand">mail</div>
+        </div>
+        <ul class="nav-list">
+          <li><a href="{{ url_for('inbox') }}" class="nav-link">Inbox</a></li>
+          <li><a href="{{ url_for('sent') }}" class="nav-link">Sent</a></li>
+          <li><a href="{{ url_for('compose') }}" class="nav-link">Compose</a></li>
+        </ul>
+        <div class="sidebar-foot">
+          <a href="{{ url_for('logout') }}" class="signout">Logout</a>
+        </div>
+      </nav>
+    {% endif %}
 
     <main id="content" class="content">
       {% with messages = get_flashed_messages(with_categories=true) %}
