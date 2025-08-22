@@ -5,8 +5,8 @@
 <div class="page-header">
   <h1>Inbox</h1>
   <div class="header-actions">
-    <button id="refresh-btn" class="btn">Refresh</button>
-    <div id="msg-length" class="small-muted"></div>
+    <div class="small-muted"><span id="msg-length">{{ messages|length }}</span>emails</div>
+    <button onclick="fetchMoreEmails()" id="refresh-btn" class="btn">refresh</button>
   </div>
 </div>
 
