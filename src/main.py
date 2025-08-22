@@ -2,10 +2,18 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from .modules.imap_client import fetch_folder, test_login, fetch_email
 from .modules.smtp_client import send_email
-from .modules.utils import login_required
+from .modules.utils import login_required, time_ago, fetch_commit
+
 
 app = Flask(__name__)
 app.secret_key = os.getenv("secret_key")
+commit = fetch_commit()
+
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -22,15 +30,9 @@ def login():
     return render_template("login.html")
 
 
-@app.route("/")
-def index():
-    return render_template("index.html")
-
-
 @app.route("/inbox")
 @login_required
 def inbox():
-    # ?start
     start = int(request.args.get("start", 0))
     limit = 10
     messages, total_count = fetch_folder(session["email_user"], session["email_pass"], "inbox", start=start, limit=limit)
@@ -43,6 +45,39 @@ def inbox():
         prev_start=prev_start,
         msglength = len(messages)
     )
+
+
+@app.route("/sent")
+@login_required
+def sent():
+    messages, total_count = fetch_folder(
+        session["email_user"],
+        session["email_pass"],
+        "Sent"
+    )
+    return render_template("sent.html", messages=messages, total_count=total_count)
+
+
+@app.route("/compose", methods=["GET", "POST"])
+@login_required
+def compose():
+    if request.method == "POST":
+        to = request.form["to"]
+        subject = request.form["subject"]
+        body = request.form["body"]
+        send_email(session["email_user"], session["email_pass"], to, subject, body)
+        flash("Email sent!", "success")
+        return redirect(url_for("inbox"))
+    return render_template("compose.html")
+
+
+@app.route("/view/<folder>/<email_id>")
+@login_required
+def view_email(folder, email_id):
+    folder=folder.title() 
+    email_data = fetch_email(session["email_user"], session["email_pass"], email_id, folder)
+    return render_template("view_email.html", email=email_data)
+
 
 @app.route("/api/inbox")
 @login_required
@@ -74,42 +109,16 @@ def api_sent():
     return jsonify(messages)
 
 
-@app.route("/sent")
-@login_required
-def sent():
-    messages, total_count = fetch_folder(
-        session["email_user"],
-        session["email_pass"],
-        "Sent"
-    )
-    return render_template("sent.html", messages=messages, total_count=total_count)
-
-
-@app.route("/compose", methods=["GET", "POST"])
-@login_required
-def compose():
-    if request.method == "POST":
-        to = request.form["to"]
-        subject = request.form["subject"]
-        body = request.form["body"]
-        send_email(session["email_user"], session["email_pass"], to, subject, body)
-        flash("Email sent!", "success")
-        return redirect(url_for("inbox"))
-    return render_template("compose.html")
-
-@app.route("/view/<folder>/<email_id>")
-@login_required
-def view_email(folder, email_id):
-    folder=folder.title() 
-    email_data = fetch_email(session["email_user"], session["email_pass"], email_id, folder)
-    return render_template("view_email.html", email=email_data)
-
-
 @app.route("/logout")
 @login_required
 def logout():
     session.clear()
     return redirect(url_for("index"))
+
+
+@app.context_processor
+def inject_commit():
+    return dict(commit=commit)
 
 if __name__ == "__main__":
     app.run(debug=False)

@@ -63,7 +63,7 @@
     </main>
 
   </div>
-  <!-- <div class="footer"> fixed slim footer </div> -->
+  <div class="footer">{{commit.sha}}: {{commit.message}} ({{commit.ago}})</div>
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   <script>
   if ('serviceWorker' in navigator) {
