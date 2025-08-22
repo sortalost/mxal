@@ -29,32 +29,8 @@ def fetch_commit():
             "sha": latest["sha"][:7],
             "author": latest["commit"]["author"]["name"],
             "date": dt_obj.strftime("%b %d, %Y @ %I:%M %p"),
-            "url": latest["html_url"],
-            "ago":time_ago(dt_obj)
+            "url": latest["html_url"]
         }
     except Exception as e:
         flash(e)
-        return {"message":"failed to fetch.","sha":"none","author":"none","date":"none","url":"none","ago":"none"}
-
-
-def time_ago(datetime_object):
-    unix_timestamp = datetime_object.timestamp()
-    seconds = int(time.time()) - unix_timestamp
-    intervals = [
-        ("decade", 315569520), # lol
-        ("year",   31556952),
-        ("month",  2592000),
-        ("day",    86400),
-        ("hour",   3600),
-        ("minute", 60),
-        ("second", 1),
-    ]
-    for label, sec in intervals:
-        count = seconds / sec
-        if count >= 1:
-            if label in ("year", "month"):
-                count = round(count, 1)
-            else:
-                count = int(count)
-            return f"{count} {label}{'s' if count != 1 else ''} ago"
-    return "just now"
+        return {"message":"failed to fetch.","sha":"none","author":"none","date":"none","url":"none"}

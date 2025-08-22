@@ -1,37 +1,28 @@
 :root { --bg:#121212; --panel:#1f1f1f; --accent:#90ffb1; --muted:#999; --link:#a0d1ff; }
-
 *{box-sizing:border-box}
 html,body{height:100%}
 body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:var(--bg);color:var(--accent);-webkit-font-smoothing:antialiased}
-
-.topbar{position:fixed;left:0;right:0;top:0;height:56px;background:var(--panel);display:flex;align-items:center;padding:0 12px;gap:8px;z-index:100;border-bottom:1px solid rgba(255,255,255,0.03)}
 a {text-decoration:underline;cursor:pointer;color: var(--link);font-weight: 600}
+.topbar{position:fixed;left:0;right:0;top:0;height:56px;background:var(--panel);display:flex;align-items:center;padding:0 12px;gap:8px;z-index:100;border-bottom:1px solid rgba(255,255,255,0.03)}
 .hamburger{background:transparent;border:none;color:var(--accent);font-size:20px;padding:6px;border-radius:6px}
 .topbar-title{flex:1;color:var(--accent);text-align:center;font-weight:600;text-decoration: underline;}
 .topbar-actions{display:flex;gap:8px}
-
 .sidebar{width:220px;max-width:80%;background:var(--panel);padding:72px 16px 16px 16px;display:flex;flex-direction:column;gap:12px;border-right:1px solid rgba(255,255,255,0.05);position:fixed;top:0;left:0;height:100%;z-index:90;transform:translateX(-100%);transition:transform .3s ease}
 .sidebar.open{transform:translateX(0)}
-
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:80}
 .overlay.active{opacity:1;pointer-events:auto}
-
 .list-sidebar{width:180px;background:var(--panel);border-radius:8px;padding:12px}
 .sidebar-foot{margin-top:auto;padding-top:8px}
-/* .nav-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
 .nav-list a{text-decoration:none;color:var(--accent);padding:10px;border-radius:8px} */
 .nav-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
 .nav-list a{color:var(--link);text-decoration:none;padding:10px;border-radius:8px;display:block}
 .nav-list a:hover{background:rgba(160,209,255,0.06);color:var(--card)}
-/* .sidebar-foot{bottom:10%;position:fixed} */
 .signout{color:#ff4141;text-decoration:solid}
-
 .content{padding-top:56px;margin-left:0;transition:none}
 .page-area{padding:12px}
 .page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .page-header h1{margin:0;font-size:20px;color:#fff}
 .header-actions{display:flex;gap:8px;align-items:center}
-
 .card{overflow-wrap:anywhere;background:#fff;color:#111;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
 .card-top{display:flex;justify-content:space-between;align-items:center}
 .card .subject{font-weight:700}
@@ -39,21 +30,17 @@ a {text-decoration:underline;cursor:pointer;color: var(--link);font-weight: 600}
 .card .date{font-size:12px;color:#999}
 .card-list{display:flex;flex-direction:column;gap:10px}
 .card-link{text-decoration:none}
-
 .mobile-footer{padding:12px 0;text-align:center}
 .btn{background:#333;color:#ddd;border:none;padding:10px 12px;border-radius:10px;cursor:pointer}
 .btn.primary{background:var(--accent);color:#111;font-weight:700}
-
 .d-desktop{display:none}
 .d-mobile{display:block}
 .list-rows,.list-pane{display:none}
-
 .compose-card{width:100%;margin:0 auto}
 .compose-form{overflow-x:clip;background:#ebebeb;padding:14px;border-radius:10px;color:#111;display:flex;flex-direction:column;gap:12px}
 .field label{display:block;font-weight:600;color:#333;margin-bottom:6px}
 .field input,.field textarea{width:100%;border:1px solid #ddd;padding:10px;border-radius:8px}
 .field .file-label{display:inline-block;padding:6px 10px;border:1px dashed #ccc;border-radius:8px;cursor:pointer;color:#666}
-
 .email-view{width:90%;margin:0 auto;background:transparent}
 .view-header{display:flex;align-items:flex-start;gap:12px;flex-direction:column}
 .back{color:var(--link);text-decoration:none}
@@ -61,8 +48,13 @@ a {text-decoration:underline;cursor:pointer;color: var(--link);font-weight: 600}
 .view-meta{display:flex;gap:12px;margin:12px 0;color:#ccc;flex-wrap:wrap}
 .view-body{background:#fff;color:#111;border-radius:8px;padding:18px;line-height:1.5}
 .view-actions{margin-top:12px;display:flex;gap:8px}
-
 button:disabled{opacity:.6;cursor:not-allowed}
 .spinner{border:2px solid #f3f3f3;border-top:2px solid #333;border-radius:50%;width:14px;height:14px;animation:spin .6s linear infinite;display:inline-block;vertical-align:middle}
 @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 .footer {font-size: smaller;background-color: var(--panel);color: var(--muted);text-align: center;line-height: 0;padding: 0px;position: fixed;left: 0;bottom: 0;width: 100%;z-index: 1000;}
+form {display: flex;flex-direction: column;gap: 12px;max-width: 400px;margin: 0 auto;}
+label {font-size: 14px;font-weight: 500;color: #ddd;margin-bottom: 4px;}
+input, textarea, select {width: 100%;padding: 10px 12px;border: 1px solid #333;border-radius: 8px;background: #1e1e1e;color: #fff;font-size: 14px;outline: none;transition: border-color 0.2s ease, background 0.2s ease;}
+input:focus, textarea:focus, select:focus {border-color: var(--accent, #90ffb1);background: #2a2a2a;}
+button {padding: 10px 14px;border: none;border-radius: 8px;background: var(--accent, #90ffb1);color: #111;font-weight: 600;font-size: 14px;cursor: pointer;transition: background 0.2s ease;}
+button:hover {background: #7ae09a;}
