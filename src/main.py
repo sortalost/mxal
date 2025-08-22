@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from .modules.imap_client import fetch_folder, test_login, fetch_email
 from .modules.smtp_client import send_email
-from .modules.utils import login_required, fetch_commit, cockblockmsg
+from .modules.utils import login_required, fetch_commit, cockblockmsg, troubleshootmsg
 import smtplib
 
 
@@ -43,10 +43,9 @@ def inbox():
         messages = [
             {
                 'id':0,
-                'subject':'empty inbox :/',
+                'subject':'EMPTY INBOX📤 | You have not received any emails yet :/',
                 'date':'now',
                 'from':'God (real)',
-                'body':'You have not received any email yet. That\'s sad, maybe. Peace :)'
             }
         ]
         total_count = 1
@@ -77,10 +76,9 @@ def sent():
         messages = [
             {
                 'id':0,
-                'subject':'Nothing sent yet (?)',
+                'subject':'NOTHING SENT 👀 | You (probably) haven\'t sent any emails yet.',
                 'date':'now',
                 'from':'God (real)',
-                'body':'You probably haven\'t sent any emails yet. (If you think this is an error, let <a href="mailto:sortalost@cock.li">me</a> know). Peace :)'
             }
         ]
         total_count = 1
@@ -114,13 +112,7 @@ def view_email(folder, email_id):
         email_data = fetch_email(session["email_user"], session["email_pass"], email_id, folder)
     except Exception as e:
         flash(f"error: {e}")
-        email_data = {
-            'id':0,
-            'subject':'boohoo',
-            'date':'now',
-            'from':'God (real)',
-            'body':f'some error in /view \n {e}'
-        }
+        email_data = troubleshootmsg
     return render_template("view_email.html", email=email_data)
 
 
