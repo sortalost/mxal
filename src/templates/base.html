@@ -29,7 +29,7 @@
     {% if session.get('logged_in') %}
       <nav id="sidebar" class="sidebar">
         <div class="sidebar-head">
-          <div class="brand">mail</div>
+          <div class="brand">mxal</div>
         </div>
         <ul class="nav-list">
           <li><a href="{{ url_for('inbox') }}" class="nav-link">Inbox</a></li>
@@ -37,6 +37,7 @@
           <li><a href="{{ url_for('compose') }}" class="nav-link">Compose</a></li>
         </ul>
         <div class="sidebar-foot">
+          <a href="//github.com/sortalost/mxal">GitHub</a>
           <a href="{{ url_for('logout') }}" class="signout">Logout</a>
         </div>
       </nav>
@@ -60,7 +61,11 @@
     </main>
 
   </div>
-
+  <div class="footer">
+    <p>
+      [ <span style="text-decoration:underline;cursor:pointer" onclick="window.location.href='//github.com/sortalost/mxal'">github</span> ]
+    </p>
+  </div>
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   <script>
   if ('serviceWorker' in navigator) {

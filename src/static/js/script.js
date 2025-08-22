@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (loadMoreMobileBtn) loadMoreMobileBtn.addEventListener("click", fetchMoreEmails);
   if (refreshBtn) refreshBtn.addEventListener("click", fetchMoreEmails);
   if (hamburger) hamburger.addEventListener("click", () => {
-    sidebar.style.display = sidebar.style.display === "none" ? "block" : "none";
+    sidebar.style.display = sidebar.style.display === "none" ? "flex" : "none";
   });
 
   // --- DOM APPEND/PREPEND HELPERS ---
