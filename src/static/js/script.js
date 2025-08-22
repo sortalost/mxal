@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const loadMoreMobileBtn = document.getElementById("load-more-mobile");
   const inboxMobileList = document.getElementById("inbox-mobile-list");
   const hamburger = document.getElementById('hamburger');
+  const mhamburger = document.getElementById('m_hamburger');
   const sidebar = document.getElementById("sidebar");
   const msgLength = document.getElementById('msg-length');
   const refreshBtn = document.getElementById('refreshBtn');
@@ -57,6 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (hamburger) hamburger.addEventListener("click", () => {
     // sidebar.style.display = sidebar.style.display === "none" ? "flex" : "none";
     sidebar.classList.toggle("closed");
+  });
+  if (mhamburger) mhamburger.addEventListener("click", () => {
+    // sidebar.style.display = sidebar.style.display === "none" ? "flex" : "none";
+    sidebar.classList.toggle("open");
   });
 
   // --- DOM APPEND/PREPEND HELPERS ---

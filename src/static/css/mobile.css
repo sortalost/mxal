@@ -48,6 +48,10 @@ body{
 .compose-fab{background:var(--accent);border:none;color:#111;padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700}
 
 .sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  height: 100%;
   width: 260px;
   background: var(--panel);
   padding: 72px 16px 16px 16px;
@@ -55,22 +59,12 @@ body{
   flex-direction: column;
   gap: 12px;
   border-right: 1px solid rgba(255,255,255,0.02);
-  transform: translateX(0);
-  transition: transform 0.3s ease;
-  position: fixed;
-  top: 0;
+  transition: left 0.3s ease;
+  z-index: 200;
+}
+
+.sidebar.open {
   left: 0;
-  height: 100%;
-}
-
-.sidebar.closed {
-  transform: translateX(-260px);
-}
-
-.content{flex:1;margin-top:56px;display:flex;overflow:hidden;margin-left: 260px;transition: margin-left 0.3s ease;}
-
-.sidebar.closed ~ .content {
-  margin-left: 0;
 }
 
 .brand{color:var(--accent);font-weight:700;font-size:18px;margin-bottom:6px}
@@ -92,7 +86,7 @@ body{
 .btn.primary{background:var(--accent);color:#111;font-weight:700}
 .btn.danger{background:#ff6b6b;color:#111}
 
-.desktop-layout{display:flex;gap:12px;height:calc(100vh - 96px)}
+.mobile-layout{display:flex;gap:12px;height:calc(100vh - 96px)}
 .list-sidebar{width:180px;background:var(--panel);border-radius:8px;padding:12px}
 .list-section-title{color:var(--link);font-weight:700;margin-bottom:8px}
 .mini-nav{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
@@ -111,10 +105,19 @@ body{
 
 .mobile-layout{display:none}
 
-.card{background:#fff;border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:6px}
-.card .subject{font-weight:700;color:#111}
+.compose-card{width:100%;margin:0 auto}
+.compose-form{overflow-x:clip;background:#ebebeb;padding:14px;border-radius:10px;color:#111;display:flex;flex-direction:column;gap:12px}
+.field label{display:block;font-weight:600;color:#333;margin-bottom:6px}
+.field input,.field textarea{width:100%;border:1px solid #ddd;padding:10px;border-radius:8px}
+.field .file-label{display:inline-block;padding:6px 10px;border:1px dashed #ccc;border-radius:8px;cursor:pointer;color:#666}
+
+.card-list{display:flex;flex-direction:column;gap:10px}
+.card-link{text-decoration:none}
+.card{background:#fff;color:#111;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.card-top{display:flex;justify-content:space-between;align-items:center}
+.card .subject{font-weight:700}
 .card .from{color:#666}
-.card .date{font-size:12px;color:#999;text-align:right}
+.card .date{font-size:12px;color:#999}
 
 .email-view{width:90%;margin:0 auto;background:transparent}
 .view-header{display: flex;align-items: flex-start;gap: 12px;flex-direction: column;}
@@ -123,19 +126,11 @@ body{
 .view-meta{display:flex;gap:12px;margin:12px 0;color:#ccc;flex-wrap:wrap}
 .view-body{background:#fff;color:#111;border-radius:8px;padding:18px;line-height:1.5}
 .view-actions{margin-top:12px;display:flex;gap:8px}
-
-.compose-card{width:90%;margin:0 auto}
-.compose-form{background:#ebebeb;padding:14px;border-radius:10px;color:#111;display:flex;flex-direction:column;gap:12px}
-.field label{display:block;font-weight:600;color:#333;margin-bottom:6px}
-.field input{width:60%;border:1px solid #ddd;padding:10px;border-radius:8px}
-.field textarea{width:90%;border:1px solid #ddd;padding:10px;border-radius:8px}
-.field .file-label{display:inline-block;padding:6px 10px;border:1px dashed #ccc;border-radius:8px;cursor:pointer;color:#666}
-
 .flash-wrap{position:fixed;top:66px;right:20px;z-index:60}
 .flash{padding:8px 12px;border-radius:8px;background:#222;color:#fff;margin-bottom:6px}
 
-.d-desktop{display:flex}
-.d-mobile{display:none}
+.d-desktop{display:none}
+.d-mobile{display:block}
 
 .view-body pre {
     white-space: pre-wrap;  /* wraps long lines */
