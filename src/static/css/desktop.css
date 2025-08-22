@@ -47,15 +47,26 @@ body{
 
 .compose-fab{background:var(--accent);border:none;color:#111;padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700}
 
-.sidebar{
-  width:260px;
-  background:var(--panel);
-  padding:72px 16px 16px 16px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  border-right:1px solid rgba(255,255,255,0.02);
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  height: 100%;
+  width: 260px;
+  background: var(--panel);
+  padding: 72px 16px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-right: 1px solid rgba(255,255,255,0.02);
+  transition: left 0.3s ease; /* smooth slide */
+  z-index: 200;
 }
+
+.sidebar.open {
+  left: 0;
+}
+
 
 .brand{color:var(--accent);font-weight:700;font-size:18px;margin-bottom:6px}
 
