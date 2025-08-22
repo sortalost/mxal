@@ -20,6 +20,10 @@ body{
   overflow:hidden;
 }
 
+a {color: #ffff00;}
+a:visited {color:#ffbb00}
+a:hover {color:#44ff00}
+
 #app-root{display:flex;flex:1;height:100%}
 
 .topbar{
