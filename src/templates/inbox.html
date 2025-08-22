@@ -10,15 +10,6 @@
   </div>
 </div>
 
-<!-- <div class="desktop-layout d-desktop">
-  <aside class="list-sidebar">
-    <div class="list-section-title">Folders</div>
-    <ul class="mini-nav">
-      <li><a href="{{ url_for('inbox') }}">Inbox</a></li>
-      <li><a href="{{ url_for('sent') }}">Sent</a></li>
-    </ul>
-  </aside> -->
-
   <section class="list-pane">
     <div class="list-rows" id="inbox-table-body">
       {% for msg in messages %}
@@ -37,7 +28,7 @@
     </div>
 
     <div class="list-footer">
-      <button id="load-more" class="btn primary">load more</button>
+      <button id="load-more" class="btn primary">Load More</button>
     </div>
   </section>
 </div>
