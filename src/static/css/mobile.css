@@ -50,6 +50,8 @@ ul {list-style: none;}
 .view-meta{display:flex;gap:12px;margin:12px 0;color:#ccc;flex-wrap:wrap}
 .view-body{background:#fff;color:#111;border-radius:8px;padding:18px;line-height:1.5}
 .view-actions{margin-top:12px;display:flex;gap:8px}
+.flash-wrap{position:fixed;top:66px;right:40px;z-index:60}
+.flash{padding:8px 12px;border-radius:8px;background:#222;color:#fff;margin-bottom:6px}
 .spinner{border:2px solid #f3f3f3;border-top:2px solid #333;border-radius:50%;width:14px;height:14px;animation:spin .6s linear infinite;display:inline-block;vertical-align:middle}
 @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 .footer {font-size: smaller;background-color: var(--panel);color: var(--muted);text-align: center;line-height: 0;padding: 0px;position: fixed;left: 0;bottom: 0;width: 100%;z-index: 1000;}

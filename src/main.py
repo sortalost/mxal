@@ -124,7 +124,7 @@ def view_email(folder, email_id):
             'subject':'boohoo',
             'date':'now',
             'from':'God (real)',
-            'body':'some error in /view'
+            'body':f'some error in /view \n {e}'
         }
     return render_template("view_email.html", email=email_data)
 
