@@ -3,6 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const inboxTableBody = document.getElementById("inbox-table-body");
   const loadMoreMobileBtn = document.getElementById("load-more-mobile");
   const inboxMobileList = document.getElementById("inbox-mobile-list");
+  const hamburger = document.getElementById('hamburger');
+  const sidebar = document.getElementById("sidebar");
+  const msgLength = document.getElementById('msg-length');
+  
 
   // Detect current folder dynamically (e.g. "inbox", "sent")
   const page = window.location.pathname.replace(/\/$/, '').split('/').pop();
@@ -27,13 +31,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
       appendMessages(messages, false); // append to bottom
       window.INBOX_DATA.loadedCount += messages.length;
+      msgLength.innerText=window.INBOX_DATA.loadedCount
     } catch (err) {
       console.error("Error loading more emails:", err);
+      msgLength.style.color="#f00"
+      msgLength.innerText=err
     }
   }
 
   if (loadMoreBtn) loadMoreBtn.addEventListener("click", fetchMoreEmails);
   if (loadMoreMobileBtn) loadMoreMobileBtn.addEventListener("click", fetchMoreEmails);
+  if (hamburger) hamburger.addEventListener("click", () => {
+    sidebar.style.display = sidebar.style.display === "none" ? "block" : "none";
+  });
 
   // --- DOM APPEND/PREPEND HELPERS ---
   function createDesktopRow(msg) {
@@ -91,6 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
   newEmailNotif.style.position = "sticky";
   newEmailNotif.style.top = "0";
   newEmailNotif.style.backgroundColor = "#fffae6";
+  newEmailNotif.style.color = "#ce1313ff";
   newEmailNotif.style.padding = "8px";
   newEmailNotif.style.textAlign = "center";
   newEmailNotif.style.fontWeight = "bold";

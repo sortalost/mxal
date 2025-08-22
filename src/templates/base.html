@@ -18,8 +18,7 @@
       <div class="topbar-title">{{ session.get('email_user') or 'mxal' }}</div>
       <div class="topbar-actions">
         {% if session.get('logged_in') %}
-          <button id="search-toggle" class="icon-btn" aria-label="search">🔍</button>
-          <button id="compose-fab" class="compose-fab" aria-label="compose">✉</button>
+          <button title="not implemented yet." id="search-toggle" class="icon-btn" aria-label="search">🔍</button>
         {% else %}
           <button onclick="window.location.href='/login'">login</button>
         {% endif %}
