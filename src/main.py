@@ -119,7 +119,7 @@ def view_email(folder, email_id):
         email_data = fetch_email(session["email_user"], session["email_pass"], email_id, folder)
     except Exception as e:
         flash(f"error: {e}")
-        messages = {
+        email_data = {
             'id':0,
             'subject':'boohoo',
             'date':'now',
