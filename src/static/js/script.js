@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const loadMoreMobileBtn = document.getElementById("load-more-mobile");
   const inboxMobileList = document.getElementById("inbox-mobile-list");
   const hamburger = document.getElementById('hamburger');
+  const overlay = document.getElementById('overlay');
   const sidebar = document.getElementById("sidebar");
   const msgLength = document.getElementById('msg-length');
   const refreshBtn = document.getElementById('refreshBtn');
@@ -54,11 +55,17 @@ document.addEventListener("DOMContentLoaded", () => {
   if (loadMoreBtn) loadMoreBtn.addEventListener("click", fetchMoreEmails);
   if (loadMoreMobileBtn) loadMoreMobileBtn.addEventListener("click", fetchMoreEmails);
   if (refreshBtn) refreshBtn.addEventListener("click", fetchMoreEmails);
-  if (hamburger) hamburger.addEventListener("click", () => {
-    // sidebar.style.display = sidebar.style.display === "none" ? "flex" : "none";
-    sidebar.classList.toggle("closed");
+  if (hamburger) hamburger.addEventListener('click', () => {
+    sidebar.classList.toggle('closed'); //desktop?
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
   });
 
+  if (overlay) overlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+  });
+  
   // --- DOM APPEND/PREPEND HELPERS ---
   function createDesktopRow(msg) {
     const row = document.createElement("a");
