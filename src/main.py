@@ -52,9 +52,12 @@ def inbox():
         total_count = 1
     next_start = start + limit if start + limit < total_count else None
     prev_start = start - limit if start - limit >= 0 else None
+    finalmsg = messages.insert(0, cockblockmsg)
+    print(messages)
+    print(finalmsg)
     return render_template(
         "inbox.html",
-        messages=messages.insert(0, cockblockmsg),
+        messages=finalmsg or [cockblockmsg],
         next_start=next_start,
         prev_start=prev_start,
         msglength = total_count
