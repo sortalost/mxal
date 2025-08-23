@@ -156,8 +156,8 @@ def api_sent():
 @app.route("/logout")
 @login_required
 def logout():
-    flash("Logged out")
     session.clear()
+    flash("Logged out")
     return redirect(url_for("index"))
 
 
