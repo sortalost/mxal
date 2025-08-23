@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (loadMoreBtn) loadMoreBtn.addEventListener("click", fetchMoreEmails);
   if (loadMoreMobileBtn) loadMoreMobileBtn.addEventListener("click", fetchMoreEmails);
-  if (refreshBtn) refreshBtn.addEventListener("click", fetchMoreEmails);
+  if (refreshBtn) refreshBtn.addEventListener("click", fetchNewEmails);
   if (hamburger) hamburger.addEventListener('click', () => {
     sidebar.classList.toggle('closed'); //desktop?
     sidebar.classList.toggle('open');
