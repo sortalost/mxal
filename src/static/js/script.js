@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.getElementById('overlay');
   const sidebar = document.getElementById("sidebar");
   const msgLength = document.getElementById('msg-length');
-  const refreshBtn = document.getElementById('refreshBtn');
+  const refreshBtn = document.getElementById('refresh-btn');
   const page = window.location.pathname.replace(/\/$/, '').split('/').pop();
 
   // --- LOAD MORE EMAILS ---
@@ -173,11 +173,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // initial immediate check (so user doesn't wait 30s)
   fetchNewEmails().catch(() => { /* ignore */ });
 
-  // Poll every 30 seconds
-  setInterval(fetchNewEmails, 30000);
+  setInterval(fetchNewEmails, 15000); // 15s
 
 });
 
