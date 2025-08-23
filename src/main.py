@@ -20,6 +20,9 @@ def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    if session.get('logged_in'):
+        flash("Already logged in")
+        return redirect(url_for('index'))
     if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
