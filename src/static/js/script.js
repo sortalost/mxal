@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const sidebar = document.getElementById("sidebar");
   const msgLength = document.getElementById('msg-length');
   const refreshBtn = document.getElementById('refreshBtn');
-  const ago = document.getElementById("ago");
   const page = window.location.pathname.replace(/\/$/, '').split('/').pop();
 
   // --- LOAD MORE EMAILS ---
@@ -174,6 +173,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // initial immediate check (so user doesn't wait 30s)
+  fetchNewEmails().catch(() => { /* ignore */ });
+
+  // Poll every 30 seconds
+  setInterval(fetchNewEmails, 30000);
+
+});
+
+
   function timeAgo(unixTimestamp) {
     const seconds = Math.floor(Date.now() / 1000) - unixTimestamp;
     const intervals = [
@@ -192,13 +200,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     return 'a few seconds';
   }
-
-  // initial immediate check (so user doesn't wait 30s)
-  fetchNewEmails().catch(() => { /* ignore */ });
-
-  // Poll every 30 seconds
-  setInterval(fetchNewEmails, 30000);
-  
+  const ago = document.getElementById("ago");
   const timestamp = parseInt(ago.dataset.timestamp);
   ago.innerText = timeAgo(timestamp);
-});
