@@ -58,7 +58,7 @@ def inbox():
         messages=messages,
         next_start=next_start,
         prev_start=prev_start,
-        msglength = total_count
+        msgLength = total_count
     )
 
 
