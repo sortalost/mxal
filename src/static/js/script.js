@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
       appendMessages(messages, false); // append to bottom
       window.INBOX_DATA.loadedCount += messages.length;
       msgLength.innerText=window.INBOX_DATA.loadedCount
-      msgLength.style.color="rgba(0, 99, 61, 0.99)"
       if (loadMoreBtn) loadMoreBtn.innerHTML = 'load more';
       if (loadMoreMobileBtn) loadMoreMobileBtn.innerHTML = 'load more';
     } catch (err) {
