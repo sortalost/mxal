@@ -41,7 +41,9 @@
       <div class="sidebar-foot">
         <p><a href='/'>About</a></p>
         <p><a href='//github.com/sortalost/mxal'>GitHub</a></p>
+      {% if session.get('logged_in') %}
         <p><a href="{{ url_for('logout') }}" class="signout">Logout</a></p>
+      {% endif %}
       </div>
     </nav>
 
