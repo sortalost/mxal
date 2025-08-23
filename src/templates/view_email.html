@@ -4,7 +4,7 @@
 
 <div class="email-view">
   <div class="view-header">
-    <a href="{{ url_for('inbox') }}" class="back">←</a>
+    <a href="#" onclick="if(document.referrer){history.back();}else{window.location='/';}" class="back">Back</a>
     <h2 class="view-subject">{{ email.subject }}</h2>
   </div>
 
