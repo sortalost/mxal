@@ -10,13 +10,21 @@
     <h2>What?</h2>
     <p>Basic web email client for <a href="//cock.li" target="_blank">cock.li</a>.</p>
     <h2>Why?</h2>
-    <p>Because <a href="//mail.cock.li" target="_blank">their</a> web client is offline due to a Roundcube <a href="https://cock.li/log.txt">vulnerability</a>.</p>
-    <h2>How?</h2>
-    <p>Login using your cock.li credentials (You must have an account, new accounts cannot be created).</p>
-    <h2>more...</h2>
+    <p>Because <a href="//mail.cock.li" target="_blank">their</a> web client is offline due to a Roundcube <a href="https://cock.li/log.txt">vulnerability</a>, and I love cock.li.</p>
+    <br>
+    <hr>
+    <br>
+    <h3>more...</h3>
     <p>Not affiliated with them.</p>
-    <p>Open sourced on <a href="//github.com/sortalost/mxal">GitHub</a>.</p>
-    <p>Why name "MXAL"? I don't know, I cannot think of anything else.</p>
+    <p>Whats "MXAL"? I don't know.</p>
+    <br>
+    <hr>
+    <br>
+    <h3>GitHub</h3>
+    <p>Source on <a href="//github.com/sortalost/mxal">GitHub</a>.</p>
+    <p>Directly deployed to vercel from GitHub.</p>
+    <p>Last updated on {{commit.date}}, ie, <span id="ago" data-timestamp="{{ commit.timestamp }}"></span> ago.</p>
+    <p>Commit {{commit.sha}}: {{commit.message}}</p>
 </div>
 
 {% endblock %}

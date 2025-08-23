@@ -61,8 +61,11 @@ def fetch_commit():
             "sha": latest["sha"][:7],
             "author": latest["commit"]["author"]["name"],
             "date": dt_obj.strftime("%b %d, %Y @ %I:%M %p"),
-            "url": latest["html_url"]
+            "url": latest["html_url"],
+            "timestamp": dt_obj.timestamp()
         }
     except Exception as e:
         flash(f"failed to fetch commit: {e}")
-        return {"message":"failed to fetch.","sha":"none","author":"none","date":"none","url":"none"}
+        return {"message":"failed to fetch.","sha":"none","author":"none","date":"none","url":"none","timestamp":"0"}
+
+

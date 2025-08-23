@@ -8,9 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sidebar = document.getElementById("sidebar");
   const msgLength = document.getElementById('msg-length');
   const refreshBtn = document.getElementById('refreshBtn');
-  
-
-  // Detect current folder dynamically (e.g. "inbox", "sent")
+  const ago = document.getElementById("ago");
   const page = window.location.pathname.replace(/\/$/, '').split('/').pop();
 
   // --- LOAD MORE EMAILS ---
@@ -174,6 +172,29 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (err) {
       console.error("Error fetching new emails:", err);
     }
+  }
+
+  function timeAgo(unixTimestamp) {
+    const seconds = Math.floor(Date.now() / 1000) - unixTimestamp;
+    const intervals = [
+        { label: 'year', seconds: 31536000 },
+        { label: 'month', seconds: 2592000 },
+        { label: 'day', seconds: 86400 },
+        { label: 'hour', seconds: 3600 },
+        { label: 'minute', seconds: 60 },
+        { label: 'second', seconds: 1 }
+      ];
+    for (const interval of intervals) {
+      const count = Math.floor(seconds / interval.seconds);
+      if (count >= 1) {
+        return `${count} ${interval.label}${count !== 1 ? 's' : ''} ago`;
+      }
+    }
+    return 'just now';
+  }
+  if (ago) {
+    const timestamp = parseInt(ago.dataset.timestamp);
+    ago.innerText = timeAgo(timestamp);
   }
 
   // initial immediate check (so user doesn't wait 30s)
