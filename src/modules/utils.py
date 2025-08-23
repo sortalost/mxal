@@ -6,14 +6,14 @@ from flask import session, request, jsonify, flash, redirect, url_for
 
 
 cockblockmsg = {
-    'id':0,
+    'id':'error',
     'subject':'COCKBLOCKED 🚨 | you are cockblocked :(',
     'date':'now',
     'from':'God (real)',
 }
 
 troubleshootmsg = {
-    'id':0,
+    'id':'error',
     'subject':'ERROR!',
     'date':'now',
     'from':'God (real)',
@@ -30,6 +30,36 @@ troubleshootmsg = {
 <p>-> The "Sent" folder does not exist, so, you (probably) haven't sent any emails yet. Go send some emails. You must NOT be cockblocked by the way.</p>
 <hr>
 <p>If you see something unexpected, let <a href="//sortalost.is-a.dev/contact" target="_blank">me</a> know.</p>
+<p>Peace.</p>
+</pre>
+'''
+}
+
+
+doesnotexistmsg = {
+    'id':'error_404',
+    'subject':'Not found',
+    'date':'now',
+    'from':'God (real)',
+    'body':f'''\
+<pre style='white-space: pre-line;'>
+<h3"not found"</h3>
+<p>email not found.</p>
+<hr>
+<p>If you are seeing something unexpected, let <a href="//sortalost.is-a.dev/contact" target="_blank">me</a> know.</p>
+<p>Peace.</p>
+</pre>
+'''
+}
+
+godmsg = {
+    'id':'god',
+    'subject':'God's emails',
+    'date':'now',
+    'from':'God (real)',
+    'body':f'''\
+<pre style='white-space: pre-line;'>
+<h2>You are loved, never forget this.</h2>
 <p>Peace.</p>
 </pre>
 '''

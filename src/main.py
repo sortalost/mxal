@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from .modules.imap_client import fetch_folder, test_login, fetch_email
 from .modules.smtp_client import send_email
-from .modules.utils import login_required, fetch_commit, cockblockmsg, troubleshootmsg
+from .modules.utils import login_required, fetch_commit, cockblockmsg, troubleshootmsg, doesnotexistmsg
 import smtplib
 
 
@@ -45,7 +45,7 @@ def inbox():
         flash("No emails.")
         messages = [
             {
-                'id':0,
+                'id':"error",
                 'subject':'EMPTY INBOX📤 | You have not received any emails yet :/',
                 'date':'now',
                 'from':'God (real)',
@@ -78,7 +78,7 @@ def sent():
         flash("Nothing sent yet")
         messages = [
             {
-                'id':0,
+                'id':"error",
                 'subject':'NOTHING SENT 👀 | You (probably) haven\'t sent any emails yet.',
                 'date':'now',
                 'from':'God (real)',
@@ -110,11 +110,18 @@ def compose():
 @app.route("/view/<folder>/<email_id>")
 @login_required
 def view_email(folder, email_id):
-    folder=folder.title()
-    try:
-        email_data = fetch_email(session["email_user"], session["email_pass"], email_id, folder)
-    except Exception as e:
+    if email_id.lower()=="error":
         email_data = troubleshootmsg
+    elif email_id.lower()=="god":
+        email_data = godmsg
+    else:
+        folder=folder.title()
+        try:
+            email_data = fetch_email(session["email_user"], session["email_pass"], email_id, folder)
+            # email found
+        except:
+            # email not found
+            email_data = doesnotexistmsg
     return render_template("view_email.html", email=email_data)
 
 
@@ -160,6 +167,16 @@ def logout():
     session.clear()
     flash("Logged out")
     return redirect(url_for("index"))
+
+
+@app.errorhandler(500)
+def servererror(e):
+    return render_template("500.html")
+
+
+@app.errorhandler(404)
+def notfound(e):
+    return render_template("404.html")
 
 
 @app.context_processor
