@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Inbox - Mail{% endblock %}
+{% block title %}Sent{% endblock %}
 {% block content %}
 
 <div class="page-header">
@@ -9,15 +9,6 @@
     <div class="small-muted">{{ messages|length }} messages</div>
   </div>
 </div>
-
-<!-- <div class="desktop-layout d-desktop">
-  <aside class="list-sidebar">
-    <div class="list-section-title">Folders</div>
-    <ul class="mini-nav">
-      <li><a href="{{ url_for('inbox') }}">Inbox</a></li>
-      <li><a href="{{ url_for('sent') }}">Sent</a></li>
-    </ul>
-  </aside> -->
 
   <section class="list-pane">
     <div class="list-rows" id="inbox-table-body">
