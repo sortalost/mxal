@@ -200,4 +200,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   const ago = document.getElementById("ago");
   const timestamp = parseInt(ago.dataset.timestamp);
-  ago.innerText = timeAgo(timestamp);
+  ago.innerText = timeAgo(timestamp);  
+
+document.querySelectorAll(".flash").forEach(flash => {
+  flash.addEventListener("click", () => {
+    flash.style.animation = "fadeOut 0.4s forwards";
+      setTimeout(() => flash.remove(), 400);
+    });
+  setTimeout(() => {
+    flash.remove();
+  }, 4000);
+});

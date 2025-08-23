@@ -60,12 +60,14 @@ a {text-decoration:underline;cursor:pointer;color: var(--link);font-weight: 600}
 .field input{width:60%;border:1px solid #ddd;padding:10px;border-radius:8px}
 .field textarea{width:90%;border:1px solid #ddd;padding:10px;border-radius:8px}
 .field .file-label{display:inline-block;padding:6px 10px;border:1px dashed #ccc;border-radius:8px;cursor:pointer;color:#666}
-.flash-wrap{position:fixed;top:66px;right:40px;z-index:60}
-.flash{padding:8px 12px;border-radius:8px;background:#222;color:#fff;margin-bottom:6px}
+.flash-wrap{position:fixed;bottom:66px;right:40px;z-index:60}
+.flash{padding:8px 12px;border-radius:8px;background:#222;color:#fff;margin-bottom:6px;opacity:0;transform:translateX(100%);animation:slideIn .4s forwards,fadeOut .4s 3s forwards;cursor:pointer}
+@keyframes slideIn{to{opacity:1;transform:translateX(0)}}
+@keyframes fadeOut{to{opacity:0;transform:translateX(100%)}}
 .d-desktop{display:flex}
 .d-mobile{display:none}
 .view-body pre {white-space: pre-wrap; word-wrap: break-word;}
-.spinner {border: 2px solid #f3f3f3; /* Light grey */border-top: 2px solid #333; /* Dark part */border-radius: 50%;width: 14px;height: 14px;animation: spin 0.6s linear infinite;display: inline-block;vertical-align: middle;}
+.spinner {border: 2px solid #f3f3f3;border-top: 2px solid #333;border-radius: 50%;width: 14px;height: 14px;animation: spin 0.6s linear infinite;display: inline-block;vertical-align: middle;}
 @keyframes spin {0% { transform: rotate(0deg); }100% { transform: rotate(360deg); }}
 .footer {font-size: smaller;background-color: var(--panel);color: var(--muted);text-align: center;line-height: 0;padding: 0px;position: fixed;left: 0;bottom: 0;width: 100%;z-index: 1000;}
 form {display: flex;flex-direction: column;gap: 12px;max-width: 400px;margin: 0 auto;}
