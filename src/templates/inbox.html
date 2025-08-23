@@ -57,7 +57,7 @@
 
 <script>
 window.INBOX_DATA = {
-  loadedCount: {{ msgLength or messages|length}},
+  loadedCount: {{ messages|length or msgLength}},
   limit: 15
 };
 </script>

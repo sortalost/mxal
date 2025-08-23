@@ -87,7 +87,7 @@ def sent():
         total_count = 1
     if session.get('cockblock'):
         messages.insert(0,cockblockmsg)
-    return render_template("sent.html", messages=messages, total_count=total_count)
+    return render_template("sent.html", messages=messages, msgLength=total_count)
 
 
 @app.route("/compose", methods=["GET", "POST"])

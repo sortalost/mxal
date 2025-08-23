@@ -39,7 +39,7 @@ a {text-decoration:underline;cursor:pointer;color: var(--link);font-weight: 600}
 .list-rows a {color:#000;font-weight:normal}
 .list-rows a:visited {background:#ddd;color:#333}
 .list-rows a:visited:hover {background:#bbb;}
-.row-left{overflow-wrap: anywhere;width:22%;font-weight:700;color:#222}
+.row-left{overflow-wrap:anywhere;width:22%;font-weight:700;color:#222}
 .row-center{flex:1}
 .row-right{width:18%;text-align:right;color:#666}
 .list-footer{padding:10px;text-align:center}
