@@ -2,7 +2,7 @@
 {% block title %}Compose{% endblock %}
 {% block content %}
 <div class="compose-card">
-  <form method="post" enctype="multipart/form-data" class="compose-form needs-validation" novalidate>
+  <form method="post" enctype="multipart/form-data" class="compose-form needs-validation">
     <div class="field">
       <label for="to">To</label>
       <input id="to" name="to" type="email" value="{{ request.args.get('reply_to', '') }}">
