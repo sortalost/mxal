@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return `${count} ${interval.label}${count !== 1 ? 's' : ''} ago`;
       }
     }
-    return 'a few seconds';
+    return 'just now';
   }
   const ago = document.getElementById("ago");
   const timestamp = parseInt(ago.dataset.timestamp);
