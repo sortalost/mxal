@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify, abort
 from .modules.imap_client import fetch_folder, test_login, fetch_email
 from .modules.smtp_client import send_email
 from .modules.utils import login_required, fetch_commit, cockblockmsg, troubleshootmsg, doesnotexistmsg
@@ -9,6 +9,7 @@ import smtplib
 app = Flask(__name__)
 app.secret_key = os.getenv("secret_key")
 commit = fetch_commit()
+debug=True
 
 
 @app.route("/")
@@ -183,5 +184,14 @@ def notfound(e):
 def inject_commit():
     return dict(commit=commit)
 
+
+@app.route("/500")
+def debug500():
+    if debug:
+        abort(500)
+    else:
+        abort(404)
+
+
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=debug)
