@@ -190,11 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return `${count} ${interval.label}${count !== 1 ? 's' : ''} ago`;
       }
     }
-    return 'just now';
-  }
-  if (ago) {
-    const timestamp = parseInt(ago.dataset.timestamp);
-    ago.innerText = timeAgo(timestamp);
+    return 'a few seconds';
   }
 
   // initial immediate check (so user doesn't wait 30s)
@@ -202,4 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Poll every 30 seconds
   setInterval(fetchNewEmails, 30000);
+  
+  const timestamp = parseInt(ago.dataset.timestamp);
+  ago.innerText = timeAgo(timestamp);
 });
