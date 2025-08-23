@@ -13,8 +13,6 @@ commit = fetch_commit()
 
 @app.route("/")
 def index():
-    if session.get('logged_in'):
-        flash('You are logged in')
     return render_template("index.html")
 
 
