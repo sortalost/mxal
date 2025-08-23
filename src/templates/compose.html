@@ -5,7 +5,7 @@
   <form method="post" enctype="multipart/form-data" class="compose-form needs-validation">
     <div class="field">
       <label for="to">To</label>
-      <input id="to" name="to" type="email" value="{{ request.args.get('reply_to', '') }}">
+      <input id="to" name="to" type="email" required value="{{ request.args.get('reply_to', '') }}">
     </div>
     <div class="field">
       <label for="subject">Subject</label>
