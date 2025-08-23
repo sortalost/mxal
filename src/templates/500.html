@@ -3,17 +3,15 @@
 {% block content %}
 
 <h2>Internal server error :/</h2>
-<p>Some error happened lol, this shouldn' really happen.</p>
+<p>Some error happened lol, this shouldn't really happen.</p>
 
 
 <p><a href="//sortalost.is-a.dev/contact" target="_blank">Tell</a> me how it happened.</p>
 <p>Add this info:</p>
 <ul>
     <li>{{request.path}}</li>
-    <li>{{request.headers}}</li>
+    <li>error: {{error}}</li>
     <li>{{request.args}}</li>
-    <li>{{request.cookies}}</li>
-    <li>{{request.remote_addr}}</li>
 </ul>
 
 {% endblock %}

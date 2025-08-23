@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify, abort
 from .modules.imap_client import fetch_folder, test_login, fetch_email
 from .modules.smtp_client import send_email
-from .modules.utils import login_required, fetch_commit, cockblockmsg, troubleshootmsg, doesnotexistmsg
+from .modules.utils import login_required, fetch_commit, cockblockmsg, troubleshootmsg, doesnotexistmsg, godmsg
 import smtplib
 
 
