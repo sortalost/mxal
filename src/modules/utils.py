@@ -54,7 +54,7 @@ doesnotexistmsg = {
 
 godmsg = {
     'id':'god',
-    'subject':'God's emails',
+    'subject':'God\'s emails',
     'date':'now',
     'from':'God (real)',
     'body':f'''\
