@@ -5,15 +5,15 @@
   <form method="post" enctype="multipart/form-data" class="compose-form needs-validation" novalidate>
     <div class="field">
       <label for="to">To</label>
-      <input id="to" name="to" type="text" value="{{ request.args.get('reply_to', '') }}">
+      <input id="to" name="to" type="email" value="{{ request.args.get('reply_to', '') }}">
     </div>
     <div class="field">
       <label for="subject">Subject</label>
-      <input id="subject" name="subject" type="text" value="{{ request.args.get('subject', '') }}">
+      <input id="subject" name="subject" type="text" required value="{{ request.args.get('subject', '') }}">
     </div>
     <div class="field">
       <label for="body">Message</label>
-      <textarea id="body" name="body" style="height:30vh"></textarea>
+      <textarea id="body" name="body" required style="height:30vh"></textarea>
     </div>
     <div class="field actions-row">
       <label class="file-label">
