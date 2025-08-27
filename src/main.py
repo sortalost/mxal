@@ -75,8 +75,9 @@ def sent():
             session["email_pass"],
             "Sent"
         )
-    except:
-        flash("Nothing sent yet")
+    except Exception as e:
+        # flash("Nothing sent yet")
+        flash(e)
         messages = [
             {
                 'id':"error",
