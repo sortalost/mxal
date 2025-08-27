@@ -26,8 +26,11 @@ troubleshootmsg = {
 <h3>2. "EMPTY INBOX 📤"</h3>
 <p>-> The "Inbox" folder is empty, ie, you have not received any emails yet. That's sad (maybe).</p>
     
-<h3>3. "NOTHING SENT👀"</h3>
+<h3>3. "NOTHING SENT 👀"</h3>
 <p>-> The "Sent" folder does not exist, so, you (probably) haven't sent any emails yet. Go send some emails. You must NOT be cockblocked by the way.</p>
+<hr>
+<h3>4. "NO JUNK 💥"</h3>
+<p>-> You dont have any junk/spam emails. You are peaceful. Smile.</p>
 <hr>
 <p>If you see something unexpected, let <a href="//sortalost.is-a.dev/contact" target="_blank">me</a> know.</p>
 <p>Peace.</p>

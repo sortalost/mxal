@@ -8,7 +8,7 @@ ul {list-style: none;}
 .hamburger{background:transparent;border:none;color:var(--accent);font-size:20px;padding:6px;border-radius:6px}
 .topbar-title{flex:1;color:var(--accent);text-align:center;font-weight:600;text-decoration: underline;}
 .topbar-actions{display:flex;gap:8px}
-.sidebar{width:220px;max-width:80%;background:var(--panel);padding:72px 16px 16px 16px;display:flex;flex-direction:column;gap:12px;border-right:1px solid rgba(255,255,255,0.05);position:fixed;top:0;left:0;height:100%;z-index:90;transform:translateX(-100%);transition:transform .3s ease}
+.sidebar{width:220px;max-width:80%;background:var(--panel);padding:72px 16px 16px 16px;display:flex;flex-direction:column;gap:12px;border-right:1px solid rgba(255,255,255,0.05);position:fixed;top:0;left:0;height:100%;z-index:90;transform:translateX(-100%);transition:transform .3s ease;overflow-y: auto;}
 .sidebar.open{transform:translateX(0)}
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:80}
 .overlay.active{opacity:1;pointer-events:auto}

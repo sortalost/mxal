@@ -3,12 +3,8 @@
 {% block content %}
 
 <div>
-    {% if session.get('logged_in') %}
-        <p>You are logged in.</p>
-        <hr>
-    {% endif %}
     <h2>What?</h2>
-    <p>Basic web email client for <a href="//cock.li" target="_blank">cock.li</a>.</p>
+    <p>Basic web email client for <a href="//cock.li" target="_blank">cock.li</a>. {% if session.get('logged_in') %}You are logged in as {{ session.get('email_user') }}{% else %}Login <a href="{{url_for('login')}}">here</a>{% endif %}.</p>
     <h2>Why?</h2>
     <p>Because <a href="//mail.cock.li" target="_blank">their</a> web client is offline due to a Roundcube <a href="https://cock.li/log.txt">vulnerability</a>, and I love cock.li.</p>
     <br>

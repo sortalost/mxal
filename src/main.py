@@ -76,8 +76,8 @@ def sent():
             "Sent"
         )
     except Exception as e:
-        # flash("Nothing sent yet")
-        flash(e)
+        flash("Nothing sent yet")
+        # flash(e)
         messages = [
             {
                 'id':"error",
@@ -90,6 +90,33 @@ def sent():
     if session.get('cockblock'):
         messages.insert(0,cockblockmsg)
     return render_template("sent.html", messages=messages, msgLength=total_count)
+
+
+@app.route("/junk")
+@login_required
+def junk():
+    try:
+        messages, total_count = fetch_folder(
+            session["email_user"],
+            session["email_pass"],
+            "Junk"
+        )
+    except Exception as e:
+        flash("No junk emails")
+        # flash(e)
+        messages = [
+            {
+                'id':"error",
+                'subject':'NO JUNK 💥 | Yay! No spam emails!',
+                'date':'now',
+                'from':'God (real)',
+            }
+        ]
+        total_count = 1
+    if session.get('cockblock'):
+        messages.insert(0,cockblockmsg)
+    return render_template("junk.html", messages=messages, msgLength=total_count)
+
 
 
 @app.route("/compose", methods=["GET", "POST"])
