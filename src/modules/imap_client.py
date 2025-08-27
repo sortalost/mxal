@@ -24,10 +24,6 @@ def fetch_folder(user, password, folder, start=0, limit=10):
     email_ids = data[0].split()
     email_ids.reverse()
     selected_ids = email_ids[start:start + limit]
-    try:
-        date_str = parsedate_to_datetime(msg["Date"]).strftime("%d/%m/%Y %I:%M %p, %a")
-    except:
-        date_str = msg.get('Date') or "unknown"
     messages = []
     for eid in selected_ids:
         _, msg_data = mail.fetch(eid, "(RFC822)")
