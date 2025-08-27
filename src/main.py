@@ -253,7 +253,7 @@ def api_trash():
 
 @app.route("/action/delete", methods=["POST"])
 def action_delete():
-    uid = request.json["id"]
+    uid = request.json["uid"]
     folder = request.json.get("folder")
     if folder is None:
         flash('err: no folder selected.')

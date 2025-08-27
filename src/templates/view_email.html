@@ -28,7 +28,7 @@
         onclick="fetch('{{ url_for('action_delete') }}', {
             method:'POST',
             headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ id: '{{ email.uid }}', folder: '{{ folder }}' })
+            body: JSON.stringify({ uid: '{{ email.id }}', folder: '{{ folder }}' })
         }).then(r => r.ok && (window.location.href='{{ url_for('trash') }}')); return false;">
         Delete
       </a>
