@@ -95,7 +95,7 @@ def trash_email(user, password, uid, from_folder, trash_folder="Trash"):
         mail.logout()
         flash(f"Could not open folder: {from_folder}")
         return None
-    result, _ = mail.uid("COPY", uid, trash_folder)
+    result, _ = mail.uid("COPY", str(uid), str(trash_folder))
     if result[0] != "OK":
         mail.logout()
         flash(f"Failed to copy message {uid} to {trash_folder}")
