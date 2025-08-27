@@ -68,9 +68,13 @@ def fetch_email(user, password, email_id, folder):
             body_html = msg.get_payload(decode=True).decode(errors="ignore")
     mail.close()
     mail.logout()
+    try:
+        date_str = parsedate_to_datetime(msg["Date"]).strftime("%d/%m/%Y %I:%M %p, %a")
+    except:
+        date_str = msg.get("Date") or "unknown"
     return {
         "from": msg["From"],
         "subject": msg["Subject"],
-        "date": parsedate_to_datetime(msg["Date"]).strftime("%A, %d %B %Y @ %I:%M %p"),
+        "date": date_str
         "body": body_html if body_html else f"<pre>{body_plain}</pre>"
     }
