@@ -258,7 +258,7 @@ def action_delete():
     if folder is None:
         flash('err: no folder selected.')
         return jsonify({"status": "error"}), 500
-    if trash_email(session["user"], session["password"], uid, from_folder=folder):
+    if trash_email(session["email_user"], session["email_pass"], uid, from_folder=folder):
         return jsonify({"status": "ok"})
     return jsonify({"status": "error"}), 500
 
