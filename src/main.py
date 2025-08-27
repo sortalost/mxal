@@ -259,6 +259,7 @@ def action_delete():
         flash('err: no folder selected.')
         return jsonify({"status": "error"}), 500
     if trash_email(session["email_user"], session["email_pass"], uid, from_folder=folder):
+        flash('deleted email')
         return jsonify({"status": "ok"})
     return jsonify({"status": "error"}), 500
 
