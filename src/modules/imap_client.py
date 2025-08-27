@@ -75,6 +75,6 @@ def fetch_email(user, password, email_id, folder):
     return {
         "from": msg["From"],
         "subject": msg["Subject"],
-        "date": date_str
+        "date": date_str,
         "body": body_html if body_html else f"<pre>{body_plain}</pre>"
     }
