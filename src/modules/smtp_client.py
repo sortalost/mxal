@@ -1,5 +1,7 @@
 import smtplib
 from email.mime.text import MIMEText
+import imaplib
+from .imap_client import IMAP_PORT, IMAP_SERVER
 
 SMTP_SERVER = "mail.cock.li"
 SMTP_PORT = 465
@@ -12,3 +14,12 @@ def send_email(user, password, to_address, subject, body):
     with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
         server.login(user, password)
         server.sendmail(user, [to_address], msg.as_string())
+    with imaplib.IMAP4_SSL(IMAP_SERVER, IMAP_PORT) as imap:
+        imap.login(user, password)
+        imap.append(
+            "Sent", 
+            "\\Seen",
+            imaplib.Time2Internaldate(time.time()),
+            msg.as_bytes()
+        )
+        imap.logout()
