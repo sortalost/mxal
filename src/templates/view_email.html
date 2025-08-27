@@ -4,7 +4,7 @@
 
 <div class="email-view">
   <div class="view-header">
-    <a href="#" onclick="if(document.referrer){history.back();}else{window.location='/';}" class="back">Back</a>
+    <a href="#" onclick="if(document.referrer){history.back();}else{window.location='/';}" class="back btn">[back]</a>
     <h2 class="view-subject">{{ email.subject }}</h2>
   </div>
 
@@ -21,9 +21,18 @@
   <div class="view-actions">
     <a href="{{ url_for('compose') }}?reply_to={{ email.from }}&subject=Re:%20{{ email.subject }}" class="btn">Reply</a>
     <a href="{{ url_for('compose') }}?forward={{ email.id }}&subject=Fwd:%20{{ email.subject }}" class="btn">Forward</a>
-    <!-- <form method="post" action="" style="display:inline">
-      <button type="submit" class="btn danger">Delete</button>
-    </form> -->
+    <div>
+      <a href="#"
+        class="btn"
+        style="background:#ee0000"
+        onclick="fetch('{{ url_for('action_delete') }}', {
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({ id: '{{ email.uid }}', folder: '{{ folder }}' })
+        }).then(r => r.ok && (window.location.href='{{ url_for('trash') }}')); return false;">
+        Delete
+      </a>
+    </div>
   </div>
 </div>
 

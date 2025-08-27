@@ -28,9 +28,10 @@ troubleshootmsg = {
     
 <h3>3. "NOTHING SENT 👀"</h3>
 <p>-> The "Sent" folder does not exist, so, you (probably) haven't sent any emails yet. Go send some emails. You must NOT be cockblocked by the way.</p>
-<hr>
 <h3>4. "NO JUNK 💥"</h3>
 <p>-> You dont have any junk/spam emails. You are peaceful. Smile.</p>
+<h3>5. "NO TRASH 🧹"</h3>
+<p>-> You dont have any trash emails. Clean email. Nice.</p>
 <hr>
 <p>If you see something unexpected, let <a href="//sortalost.is-a.dev/contact" target="_blank">me</a> know.</p>
 <p>Peace.</p>

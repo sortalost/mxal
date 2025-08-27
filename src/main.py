@@ -118,6 +118,31 @@ def junk():
     return render_template("junk.html", messages=messages, msgLength=total_count)
 
 
+@app.route("/trash")
+@login_required
+def trash():
+    try:
+        messages, total_count = fetch_folder(
+            session["email_user"],
+            session["email_pass"],
+            "Trash"
+        )
+    except Exception as e:
+        flash("No trash. Clean.")
+        # flash(e)
+        messages = [
+            {
+                'id':"error",
+                'subject':'NO TRASH 🧹 | Spick and span type shit.',
+                'date':'now',
+                'from':'God (real)',
+            }
+        ]
+        total_count = 1
+    if session.get('cockblock'):
+        messages.insert(0,cockblockmsg)
+    return render_template("trash.html", messages=messages, msgLength=total_count)
+
 
 @app.route("/compose", methods=["GET", "POST"])
 @login_required
@@ -151,7 +176,7 @@ def view_email(folder, email_id):
         except:
             # email not found
             email_data = doesnotexistmsg
-    return render_template("view_email.html", email=email_data)
+    return render_template("view_email.html", email=email_data,folder=folder)
 
 
 @app.route("/api/inbox")
@@ -188,6 +213,54 @@ def api_sent():
     except Exception as e:
         return {'error':str(e)}
     return jsonify(messages)
+
+
+@app.route("/api/junk")
+@login_required
+def api_junk():
+    start = int(request.args.get("start", 0))
+    limit = int(request.args.get("limit", 10))
+    try:
+        messages, _ = fetch_folder(
+            session["email_user"],
+            session["email_pass"],
+            "Junk",
+            start=start,
+            limit=limit
+        )
+    except Exception as e:
+        return {'error':str(e)}
+    return jsonify(messages)
+
+
+@app.route("/api/trash")
+@login_required
+def api_trash():
+    start = int(request.args.get("start", 0))
+    limit = int(request.args.get("limit", 10))
+    try:
+        messages, _ = fetch_folder(
+            session["email_user"],
+            session["email_pass"],
+            "Trash",
+            start=start,
+            limit=limit
+        )
+    except Exception as e:
+        return {'error':str(e)}
+    return jsonify(messages)
+
+
+@app.route("/action/delete", methods=["POST"])
+def action_delete():
+    uid = request.json["id"]
+    folder = request.json.get("folder")
+    if folder is None:
+        flash('err: no folder selected.')
+        return jsonify({"status": "error"}), 500
+    if delete_email(session["user"], session["password"], uid, from_folder=folder):
+        return jsonify({"status": "ok"})
+    return jsonify({"status": "error"}), 500
 
 
 @app.route("/logout")
