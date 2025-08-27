@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify, abort
-from .modules.imap_client import fetch_folder, test_login, fetch_email
+from .modules.imap_client import fetch_folder, test_login, fetch_email, trash_email
 from .modules.smtp_client import send_email
 from .modules.utils import login_required, fetch_commit, cockblockmsg, troubleshootmsg, doesnotexistmsg, godmsg
 import smtplib
@@ -258,7 +258,7 @@ def action_delete():
     if folder is None:
         flash('err: no folder selected.')
         return jsonify({"status": "error"}), 500
-    if delete_email(session["user"], session["password"], uid, from_folder=folder):
+    if trash_email(session["user"], session["password"], uid, from_folder=folder):
         return jsonify({"status": "ok"})
     return jsonify({"status": "error"}), 500
 
