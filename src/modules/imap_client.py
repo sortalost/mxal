@@ -33,6 +33,10 @@ def fetch_folder(user, password, folder, start=0, limit=10):
         _, msg_data = mail.fetch(eid, "(RFC822)")
         raw_email = msg_data[0][1]
         msg = email.message_from_bytes(raw_email)
+        try:
+            date_str = parsedate_to_datetime(msg["Date"]).strftime("%d/%m/%Y %I:%M %p, %a")
+        except:
+            date_str = msg.get('Date') or "unknown"
         messages.append({
             "id": eid.decode(),
             "from": msg["From"],
