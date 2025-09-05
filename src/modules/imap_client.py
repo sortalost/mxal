@@ -83,7 +83,7 @@ def fetch_email(user, password, uid, folder):
         "from": msg["From"],
         "subject": msg["Subject"],
         "date": date_str,
-        "body": body_html if body_html else f"<pre>{body_plain}</pre>"
+        "body": body_html if body_html else f"<pre style='white-space: pre-wrap;'>{body_plain}</pre>"
     }
 
 
@@ -105,3 +105,4 @@ def trash_email(user, password, uid, from_folder, trash_folder="Trash"):
     mail.close()
     mail.logout()
     return True
+
